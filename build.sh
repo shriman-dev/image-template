@@ -17,7 +17,7 @@ rpm-ostree override remove fedora-chromium-config fedora-chromium-config-gnome f
                             gnome-shell-extension-window-list gnome-terminal gnome-terminal-nautilus gnome-tour gnome-user-docs plocate yelp
 rpm-ostree install firejail firewall-config \
                    dkms zstd dmraid \
-                   ptyxis 
+                   ptyxis \
                    dosfstools exfatprogs gpart gparted \
                    nautilus-extensions nautilus-python sushi \
                    uresourced irqbalance

@@ -16,8 +16,9 @@ RELEASE="$(rpm -E %fedora)"
 rpm-ostree install screen
 
 # this would install a package from rpmfusion
-# rpm-ostree install vlc
+rpm-ostree install firejail firewall-config dkms zstd dmraid dosfstools exfatprogs gpart gparted nautilus-extensions nautilus-python sushi uresourced irqbalance
 
 #### Example for enabling a System Unit File
 
 systemctl enable podman.socket
+systemctl enable irqbalance

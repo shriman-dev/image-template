@@ -45,7 +45,7 @@ TimeoutStartSec=0
 WantedBy=multi-user.target
 ' > /etc/systemd/system/post-boot-script.service"
 
-
+hostnamectl set-hostname --static "sanganak"
 
 
 sed -i "s|.*issue_discards =.*|issue_discards = 1|"  /etc/lvm/lvm.conf

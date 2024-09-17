@@ -72,7 +72,7 @@ cleanup
 performance-and-compatibility() {
 cp -rv ${SCRIPT_DIR}/systemfiles/* /
 
-chmod +x /etc/systemd/system/post-boot-script.sh
+#chmod +x /etc/systemd/system/post-boot-script.sh
 
 systemctl enable everyFewMins.service everyFewMins.timer
 

@@ -74,8 +74,7 @@ cp -rv ${SCRIPT_DIR}/systemfiles/* /
 
 chmod +x /etc/systemd/system/post-boot-script.sh
 
-systemctl enable post-boot-script.service \
-					  everyFewMins.service everyFewMins.timer
+systemctl enable everyFewMins.service everyFewMins.timer
 
 gsettings set org.freedesktop.Tracker3.Miner.Files crawling-interval -2 
 gsettings set org.freedesktop.Tracker3.Miner.Files enable-monitors false

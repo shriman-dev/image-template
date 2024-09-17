@@ -49,20 +49,19 @@ WantedBy=multi-user.target
 sed -i "s|.*issue_discards =.*|issue_discards = 1|"  /etc/lvm/lvm.conf
 
 cleanup() {
-rm /usr/lib/systemd/user/tracker-miner-fs-3.service
-rm /usr/lib/systemd/user/tracker-miner-fs-control-3.service
-rm /usr/lib/systemd/user/tracker-miner-rss-3.service
-rm /usr/lib/systemd/user/tracker-writeback-3.service
-rm /usr/lib/systemd/user/tracker-xdg-portal-3.service
-rm /usr/lib/systemd/system/NetworkManager-wait-online.service
-rm /usr/lib/systemd/system/systemd-networkd-wait-online.service
-rm /etc/xdg/autostart/nvidia-settings-load.desktop
-rm /etc/xdg/autostart/org.gnome.Software.desktop
-rm /etc/xdg/autostart/tracker-miner-fs-3.desktop
-rm /etc/xdg/autostart/tracker-miner-rss-3.desktop
+rm -v /usr/lib/systemd/user/tracker-miner-fs-3.service
+rm -v /usr/lib/systemd/user/tracker-miner-fs-control-3.service
+rm -v /usr/lib/systemd/user/tracker-miner-rss-3.service
+rm -v /usr/lib/systemd/user/tracker-writeback-3.service
+rm -v /usr/lib/systemd/user/tracker-xdg-portal-3.service
+rm -v /usr/lib/systemd/system/NetworkManager-wait-online.service
+rm -v /usr/lib/systemd/system/systemd-networkd-wait-online.service
+rm -v /etc/xdg/autostart/nvidia-settings-load.desktop
+rm -v /etc/xdg/autostart/org.gnome.Software.desktop
+rm -v /etc/xdg/autostart/tracker-miner-fs-3.desktop
+rm -v /etc/xdg/autostart/tracker-miner-rss-3.desktop
 }
 cleanup
-ostree admin kargs edit-in-place --append-if-missing=pci=noats
 
 #### Example for enabling a System Unit File
 systemctl enable post-boot-script.service

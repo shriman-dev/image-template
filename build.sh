@@ -82,9 +82,3 @@ gsettings set org.gnome.software download-updates false
 gsettings set org.gnome.software download-updates-notify false
 }
 
-
-#### Example for enabling a System Unit File
-systemctl enable post-boot-script.service
-systemctl enable fstrim.timer
-systemctl enable podman.socket
-systemctl enable irqbalance

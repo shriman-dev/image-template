@@ -22,11 +22,34 @@ rpm-ostree install firejail firewall-config \
                    nautilus-extensions nautilus-python sushi \
                    uresourced irqbalance
 
+sh -c "echo '#!/bin/bsh
+chattr -i /
 mkdir -p /nix
+chattr +i /
+mount -a -m -o x-gvfs-hide
+' > /var/nix-mount.sh"
+
+sh -c "echo '
+[Unit]
+Description=nix-mount
+DefaultDependencies=no
+
+[Service]
+Type=oneshot
+ExecStart=/var/nix-mount.sh
+TimeoutStartSec=0
+
+[Install]
+WantedBy=multi-user.target
+' > /etc/systemd/system/nix-mount.service"
+
+
+
 
 sed -i "s|.*issue_discards =.*|issue_discards = 1|"  /etc/lvm/lvm.conf
 
 #### Example for enabling a System Unit File
+systemctl enable nix-mount.service
 systemctl enable fstrim.timer
 systemctl enable podman.socket
 systemctl enable irqbalance

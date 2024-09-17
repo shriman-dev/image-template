@@ -29,6 +29,8 @@ chattr +i /
 mount -a -m -o x-gvfs-hide
 ' > /etc/systemd/system/post-boot-script.sh"
 
+chmod +x /etc/systemd/system/post-boot-script.sh
+
 sh -c "echo '
 [Unit]
 Description=post-boot-script

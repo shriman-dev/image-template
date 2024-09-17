@@ -27,21 +27,21 @@ chattr -i /
 mkdir -p /nix
 chattr +i /
 mount -a -m -o x-gvfs-hide
-' > /var/nix-mount.sh"
+' > /etc/systemd/system/post-boot-script.sh"
 
 sh -c "echo '
 [Unit]
-Description=nix-mount
+Description=post-boot-script
 DefaultDependencies=no
 
 [Service]
 Type=oneshot
-ExecStart=/var/nix-mount.sh
+ExecStart=/etc/systemd/system/post-boot-script.sh
 TimeoutStartSec=0
 
 [Install]
 WantedBy=multi-user.target
-' > /etc/systemd/system/nix-mount.service"
+' > /etc/systemd/system/post-boot-script.service"
 
 
 

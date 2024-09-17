@@ -7,14 +7,14 @@ SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 grub-kargs() {
 rpm-ostree kargs --append-if-missing=rd.luks.options=discard \
-					  --append-if-missing=rd.udev.log_priority=3 \
-					  --append-if-missing=loglevel=3 \
-					  --append-if-missing=sysrq_always_enabled=1 \
-					  --append-if-missing=nowatchdog \
-					  --append-if-missing=amdgpu.ppfeaturemask=0xffffffff \
-					  --append-if-missing=processor.ignore_ppc=1 \
-					  --append-if-missing=split_lock_detect=off \
-					  --append-if-missing=pci=noats
+                 --append-if-missing=rd.udev.log_priority=3 \
+                 --append-if-missing=loglevel=3 \
+                 --append-if-missing=sysrq_always_enabled=1 \
+                 --append-if-missing=nowatchdog \
+                 --append-if-missing=amdgpu.ppfeaturemask=0xffffffff \
+                 --append-if-missing=processor.ignore_ppc=1 \
+                 --append-if-missing=split_lock_detect=off \
+                 --append-if-missing=pci=noats
 #--append-if-missing=amdgpu.gttsize=3000
 }
 
@@ -29,27 +29,27 @@ disk-up
 
 debloat() {
 rpm-ostree override remove fedora-chromium-config fedora-chromium-config-gnome \
-									fedora-flathub-remote fedora-workstation-backgrounds \
-									firefox firefox-langpacks gnome-browser-connector \
-									gnome-classic-session gnome-classic-session-xsession \
-									gnome-initial-setup gnome-shell-extension-apps-menu \
-									gnome-shell-extension-background-logo \
-									gnome-shell-extension-launch-new-instance \
-									gnome-shell-extension-places-menu \
-									gnome-shell-extension-window-list \
-									gnome-terminal gnome-terminal-nautilus gnome-tour \
-									gnome-user-docs plocate yelp
+                           fedora-flathub-remote fedora-workstation-backgrounds \
+                           firefox firefox-langpacks gnome-browser-connector \
+                           gnome-classic-session gnome-classic-session-xsession \
+                           gnome-initial-setup gnome-shell-extension-apps-menu \
+                           gnome-shell-extension-background-logo \
+                           gnome-shell-extension-launch-new-instance \
+                           gnome-shell-extension-places-menu \
+                           gnome-shell-extension-window-list \
+                           gnome-terminal gnome-terminal-nautilus gnome-tour \
+                           gnome-user-docs plocate yelp
 }
 debloat
 
 
 install-pkgs() {
 rpm-ostree install firejail firewall-config \
-						 dkms zstd dmraid \
-						 ptyxis \
-						 dosfstools exfatprogs gpart gparted \
-						 nautilus-extensions nautilus-python sushi \
-						 uresourced irqbalance
+                   dkms zstd dmraid \
+                   ptyxis \
+                   dosfstools exfatprogs gpart gparted \
+                   nautilus-extensions nautilus-python sushi \
+                   uresourced irqbalance
 }
 install-pkgs
 
@@ -78,7 +78,7 @@ chmod +x /usr/bin/ramclean.sh
 chmod +x /etc/systemd/system/post-boot-script.sh
 
 systemctl enable post-boot-script.service \
-					  everyFewMins.service everyFewMins.timer
+                 everyFewMins.service everyFewMins.timer
 
 }
 performance-and-compatibility

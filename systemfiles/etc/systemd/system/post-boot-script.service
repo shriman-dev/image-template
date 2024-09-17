@@ -1,0 +1,10 @@
+
+[Unit]
+Description=post-boot-script
+
+[Service]
+ExecStart=/etc/systemd/system/post-boot-script.sh
+
+[Install]
+WantedBy=multi-user.target
+

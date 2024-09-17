@@ -72,13 +72,15 @@ cleanup
 performance-and-compatibility() {
 cp -rv ${SCRIPT_DIR}/systemfiles/* /
 
-#chmod +x /etc/systemd/system/post-boot-script.sh
+chmod +x /usr/bin/buttersnap.sh
+chmod +x /usr/bin/performance-tweaks.sh
+chmod +x /usr/bin/ramclean.sh
+chmod +x /etc/systemd/system/post-boot-script.sh
 
-systemctl enable everyFewMins.service everyFewMins.timer
+systemctl enable post-boot-script.service \
+					  everyFewMins.service everyFewMins.timer
 
-gsettings set org.freedesktop.Tracker3.Miner.Files crawling-interval -2 
-gsettings set org.freedesktop.Tracker3.Miner.Files enable-monitors false
-gsettings set org.gnome.software download-updates false
-gsettings set org.gnome.software download-updates-notify false
 }
+performance-and-compatibility
+
 

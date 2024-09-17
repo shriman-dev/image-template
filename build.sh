@@ -49,7 +49,7 @@ WantedBy=multi-user.target
 sed -i "s|.*issue_discards =.*|issue_discards = 1|"  /etc/lvm/lvm.conf
 
 #### Example for enabling a System Unit File
-systemctl enable nix-mount.service
+systemctl enable post-boot-script.service
 systemctl enable fstrim.timer
 systemctl enable podman.socket
 systemctl enable irqbalance

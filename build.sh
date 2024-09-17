@@ -62,7 +62,7 @@ rm /etc/xdg/autostart/tracker-miner-fs-3.desktop
 rm /etc/xdg/autostart/tracker-miner-rss-3.desktop
 }
 cleanup
-
+ostree admin kargs edit-in-place --append-if-missing=pci=noats
 
 #### Example for enabling a System Unit File
 systemctl enable post-boot-script.service

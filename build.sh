@@ -3,7 +3,7 @@
 set -ouex pipefail
 
 RELEASE="$(rpm -E %fedora)"
-SCRIPT_DIR="$( cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd )"
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 grub-kargs() {
 rpm-ostree kargs --append-if-missing=rd.luks.options=discard \

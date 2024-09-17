@@ -22,7 +22,7 @@ rpm-ostree install firejail firewall-config \
                    nautilus-extensions nautilus-python sushi \
                    uresourced irqbalance
 
-sh -c "echo '#!/bin/bsh
+sh -c "echo '#!/bin/sh
 chattr -i /
 mkdir -p /nix
 chattr +i /

@@ -72,7 +72,8 @@ chmod +x /usr/bin/btdu
 
 rpm-ostree install btop htop ncdu compsize
 
-rpm-ostree install fio tree yazi rclone gocryptfs cryfs archivemount borgbackup
+rpm-ostree install fio tree rclone cryfs archivemount borgbackup
+#yazi gocryptfs
 
 rpm-ostree install hwinfo tmux asciinema tldr which wmctrl brightnessctl aria2 \
                    libinput ydotool ffmpeg 

@@ -53,8 +53,8 @@ debloat
 
 install-pkgs() {
 # setup Copr repos
-curl -Lo /usr/bin/copr https://raw.githubusercontent.com/ublue-os/COPR-command/main/copr && \
-chmod +x /usr/bin/copr
+#curl -Lo /usr/bin/copr https://raw.githubusercontent.com/ublue-os/COPR-command/main/copr && \
+#chmod +x /usr/bin/copr
 curl -Lo /etc/yum.repos.d/_starship_copr.repo  https://copr.fedorainfracloud.org/coprs/atim/starship/repo/fedora-${RELEASE}/atim-starship-fedora-${RELEASE}.repo
 curl -Lo /etc/yum.repos.d/_scrcpy_copr.repo https://copr.fedorainfracloud.org/coprs/zeno/scrcpy/repo/fedora-${RELEASE}/zeno-scrcpy-fedora-${RELEASE}.repo
 rpm-ostree install https://download.onlyoffice.com/repo/centos/main/noarch/onlyoffice-repo.noarch.rpm
@@ -104,7 +104,7 @@ rpm-ostree install nemo nemo-emblems nemo-extensions nemo-python \
 #amberol
 
 upscayl_release=$(curl -s -X GET https://api.github.com/repos/upscayl/upscayl/releases/latest | grep -o '"browser_download_url": "[^"]*.rpm"' | cut -d'"' -f4)
-rpm-ostree install "${upscayl_release}"
+#rpm-ostree install "${upscayl_release}"
 
 rpm-ostree install inkscape gimp3 rawtherapee krita pitivi shotcut pinta
 

@@ -108,8 +108,8 @@ upscayl_release=$(curl -s -X GET https://api.github.com/repos/upscayl/upscayl/re
 
 rpm-ostree install inkscape gimp3 rawtherapee krita pitivi shotcut pinta
 
-rpm-ostree install libreoffice onlyoffice-desktopeditors gedit foliate calibre \
-                   rnote
+rpm-ostree install libreoffice onlyoffice-desktopeditors gedit foliate calibre
+#rnote
 
 chmod +x ${SCRIPT_DIR}/configure/get-nerd-fonts.sh
 ${SCRIPT_DIR}/configure/get-nerd-fonts.sh

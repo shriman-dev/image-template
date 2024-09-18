@@ -29,7 +29,7 @@ debloat() {
 #gnome-shell-extension-apps-menu \
 #gnome-shell-extension-background-logo \
 #gnome-tour \
-
+#gnome-shell-extension-hotedg \
 rpm-ostree override remove fedora-chromium-config fedora-chromium-config-gnome \
                            fedora-flathub-remote fedora-workstation-backgrounds \
                            gnome-browser-connector \
@@ -40,7 +40,6 @@ rpm-ostree override remove fedora-chromium-config fedora-chromium-config-gnome \
                            gnome-shell-extension-compiz-alike-magic-lamp-effect \
                            gnome-shell-extension-compiz-windows-effect \
                            gnome-shell-extension-gamerzilla \
-                           gnome-shell-extension-hotedg \
                            gnome-shell-extension-just-perfection \
                            gnome-shell-extension-launch-new-instance \
                            gnome-shell-extension-places-menu \

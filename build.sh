@@ -22,7 +22,8 @@ rpm-ostree kargs --append-if-missing=rd.luks.options=discard \
 debloat() {
 rpm-ostree override remove fedora-chromium-config fedora-chromium-config-gnome \
                            fedora-flathub-remote fedora-workstation-backgrounds \
-                           firefox firefox-langpacks gnome-browser-connector \
+                           #firefox firefox-langpacks \
+                           gnome-browser-connector \
                            gnome-classic-session gnome-classic-session-xsession \
                            gnome-initial-setup gnome-shell-extension-apps-menu \
                            gnome-shell-extension-background-logo \

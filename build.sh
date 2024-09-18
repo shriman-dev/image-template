@@ -99,8 +99,9 @@ rpm-ostree install dconf-editor gnome-tweaks gnome-extensions-app appeditor \
 rpm-ostree install nemo nemo-emblems nemo-extensions nemo-python \
                    nemo-search-helpers nemo-terminal nemo-gsconnect nemo-preview \
                    gtkhash-nemo nautilus nautilus-extensions nautilus-python sushi \
-                   nautilus-gsconnect amberol clapper vlc loupe meld evince eog \
+                   nautilus-gsconnect clapper vlc loupe meld evince eog \
                    file-roller shotwell
+#amberol
 
 upscayl_release=$(curl -s -X GET https://api.github.com/repos/upscayl/upscayl/releases/latest | grep -o '"browser_download_url": "[^"]*.rpm"' | cut -d'"' -f4)
 rpm-ostree install "${upscayl_release}"

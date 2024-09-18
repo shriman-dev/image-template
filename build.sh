@@ -34,7 +34,6 @@ rpm-ostree override remove fedora-chromium-config fedora-chromium-config-gnome \
                            fedora-flathub-remote fedora-workstation-backgrounds \
                            gnome-browser-connector \
                            gnome-user-docs plocate yelp \
-                           adw-gtk3-theme \
                            gnome-shell-extension-bazzite-menu \
                            gnome-shell-extension-blur-my-shell \
                            gnome-shell-extension-compiz-alike-magic-lamp-effect \
@@ -44,7 +43,7 @@ rpm-ostree override remove fedora-chromium-config fedora-chromium-config-gnome \
                            gnome-shell-extension-launch-new-instance \
                            gnome-shell-extension-places-menu \
                            gnome-shell-extension-window-list \
-                           openssh-askpass
+                           openssh-askpass webapp-manager
 
 
 }
@@ -57,86 +56,21 @@ install-pkgs() {
 #chmod +x /usr/bin/copr
 curl -Lo /etc/yum.repos.d/_starship_copr.repo  https://copr.fedorainfracloud.org/coprs/atim/starship/repo/fedora-${RELEASE}/atim-starship-fedora-${RELEASE}.repo
 curl -Lo /etc/yum.repos.d/_scrcpy_copr.repo https://copr.fedorainfracloud.org/coprs/zeno/scrcpy/repo/fedora-${RELEASE}/zeno-scrcpy-fedora-${RELEASE}.repo
-rpm-ostree install https://download.onlyoffice.com/repo/centos/main/noarch/onlyoffice-repo.noarch.rpm
+
 curl -Lo /etc/yum.repos.d/_librewolf.repo https://rpm.librewolf.net/librewolf-repo.repo 
-curl -Lo /etc/yum.repos.d/_brave-browser.repo https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
-curl -Lo /etc/yum.repos.d/_resources.repo https://copr.fedorainfracloud.org/coprs/atim/resources/repo/fedora-${RELEASE}/atim-resources-fedora-${RELEASE}.repo
 
-rpm-ostree install firejail firewall-config setools-gui clamav \
-                   clamav-freshclam clamav-unofficial-sigs
+rpm-ostree install firejail firewall-config setools-gui
 
-rpm-ostree install fish bat eza starship fastfetch
+rpm-ostree install nautilus nautilus-extensions nautilus-python sushi \
+                   nautilus-gsconnect
 
-curl -Lo /usr/bin/btdu https://github.com/CyberShadow/btdu/releases/latest/download/btdu-static-x86_64
-chmod +x /usr/bin/btdu
+rpm-ostree install rsms-inter-fonts papirus-icon-theme
 
-rpm-ostree install btop htop ncdu compsize
+rpm-ostree install filelight dosfstools exfatprogs gpart gparted zstd dmraid
 
-rpm-ostree install fio tree rclone cryfs archivemount borgbackup
-#yazi gocryptfs
+rpm-ostree install bottles fluidsynth gamescope goverlay 
 
-rpm-ostree install hwinfo tmux asciinema tldr which wmctrl brightnessctl aria2 \
-                   libinput ydotool ffmpeg 
-
-rpm-ostree install cava asciiquarium cmatrix oneko sl cbonsai neo cowsay bastet
-
-codium_release=$( curl -s -X GET https://api.github.com/repos/VSCodium/vscodium/releases/latest | grep -o '"browser_download_url": "[^"]*.x86_64.rpm"' | cut -d'"' -f4)
-
-rpm-ostree install "${codium_release}"
-
-rpm-ostree install python3-pip micro neovim git curl sassc sqlite sqlitebrowser \
-                   gnome-connections
-
-rpm-ostree install syncthing android-tools scrcpy
-
-rpm-ostree install libappindicator libappindicator-gtk3 libgtop2 gnome-menus \
-                   gnome-themes-extra gtk-murrine-engine gtk2-engines
-
-rpm-ostree install dconf-editor gnome-tweaks gnome-extensions-app appeditor \
-                   menulibre qt5ct kvantum gnome-characters awf-gtk2 awf-gtk3 \
-                   awf-gtk4
-
-rpm-ostree install nemo nemo-emblems nemo-extensions nemo-python \
-                   nemo-search-helpers nemo-terminal nemo-gsconnect nemo-preview \
-                   gtkhash-nemo nautilus nautilus-extensions nautilus-python sushi \
-                   nautilus-gsconnect clapper vlc loupe meld evince eog \
-                   file-roller shotwell
-#amberol
-
-upscayl_release=$(curl -s -X GET https://api.github.com/repos/upscayl/upscayl/releases/latest | grep -o '"browser_download_url": "[^"]*.rpm"' | cut -d'"' -f4)
-#rpm-ostree install "${upscayl_release}"
-
-rpm-ostree install inkscape gimp3 rawtherapee krita pitivi shotcut pinta
-
-rpm-ostree install libreoffice onlyoffice-desktopeditors gedit foliate calibre
-#rnote
-
-chmod +x ${SCRIPT_DIR}/configure/get-nerd-fonts.sh
-${SCRIPT_DIR}/configure/get-nerd-fonts.sh
-rpm-ostree install rsms-inter-fonts 
-
-freetube_release=$(curl -s -X GET https://api.github.com/repos/FreeTubeApp/FreeTube/releases | grep -o '"browser_download_url": "[^"]*_amd64.rpm"' | head -n1 | cut -d'"' -f4)
-rpm-ostree install "${freetube_release}"
-rpm-ostree install epiphany librewolf brave-browser
-
-rpm-ostree install gnome-logs resources
-
-rpm-ostree install filelight baobab dosfstools exfatprogs gpart gparted zstd dmraid \
-                   vaults
-
-rpm-ostree install gnome-power-manager gnome-firmware gnome-color-manager \
-                   ptyxis blackbox-terminal 
-
-rpm-ostree install gnome-boxes
-
-rpm-ostree install gnome-calendar gnome-network-displays gnome-clocks \
-                   gnome-calculator snapshot gnome-weather gnome-sound-recorder \
-                   cheese
-
-rpm-ostree install antimicrox bottles fluidsynth
-
-rpm-ostree install dkms  \
-                   uresourced irqbalance
+rpm-ostree install dkms uresourced irqbalance
 }
 install-pkgs
 
@@ -190,6 +124,12 @@ systemctl enable nix.mount \
 }
 performance-and-compatibility
 
+configurations() {
+cp -r ${SCRIPT_DIR}/configure/plymouth-themes/* /usr/share/plymouth/themes
+cp -r ${SCRIPT_DIR}/configure/gtk-themes/* /usr/share/themes
+cp -r ${SCRIPT_DIR}/configure/icons/* /usr/share/icons
+}
+configurations
 
 drive-care() {
 sed -i "s|.*issue_discards =.*|issue_discards = 1|"  /etc/lvm/lvm.conf

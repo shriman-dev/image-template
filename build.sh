@@ -22,13 +22,13 @@ rpm-ostree kargs --append-if-missing=rd.luks.options=discard \
 debloat() {
 #firefox firefox-langpacks \
 #gnome-shell-extension-launch-new-instance \
+#gnome-shell-extension-places-menu \
 rpm-ostree override remove fedora-chromium-config fedora-chromium-config-gnome \
                            fedora-flathub-remote fedora-workstation-backgrounds \
                            gnome-browser-connector \
                            gnome-classic-session gnome-classic-session-xsession \
                            gnome-initial-setup gnome-shell-extension-apps-menu \
                            gnome-shell-extension-background-logo \
-                           gnome-shell-extension-places-menu \
                            gnome-shell-extension-window-list gnome-tour \
                            gnome-user-docs plocate yelp \
                            adw-gtk3-theme-5.3-1.fc40.noarch fastfetch \

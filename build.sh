@@ -70,7 +70,7 @@ rpm-ostree install filelight dosfstools exfatprogs gpart gparted zstd dmraid
 
 rpm-ostree install bottles fluidsynth gamescope goverlay 
 
-rpm-ostree install dkms uresourced irqbalance
+rpm-ostree install uresourced irqbalance
 }
 install-pkgs
 

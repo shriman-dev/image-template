@@ -137,6 +137,6 @@ systemctl enable fstrim.timer
 #sudo systemctl daemon-reload && sudo systemctl restart cryptsetup.target
 #sudo mount -a -m -o x-gvfs-hide
 }
-disk-up
+drive-care
 
 

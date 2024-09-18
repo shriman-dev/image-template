@@ -24,15 +24,17 @@ debloat() {
 #gnome-shell-extension-launch-new-instance \
 #gnome-shell-extension-places-menu \
 #gnome-shell-extension-window-list
+#gnome-classic-session gnome-classic-session-xsession \
+#gnome-initial-setup
+#gnome-shell-extension-apps-menu \
+#gnome-shell-extension-background-logo \
+#gnome-tour \
+
 rpm-ostree override remove fedora-chromium-config fedora-chromium-config-gnome \
                            fedora-flathub-remote fedora-workstation-backgrounds \
                            gnome-browser-connector \
-                           gnome-classic-session gnome-classic-session-xsession \
-                           gnome-initial-setup gnome-shell-extension-apps-menu \
-                           gnome-shell-extension-background-logo \
-                           gnome-tour \
                            gnome-user-docs plocate yelp \
-                           adw-gtk3-theme-5.3-1.fc40.noarch fastfetch \
+                           adw-gtk3-theme \
                            gnome-shell-extension-bazzite-menu \
                            gnome-shell-extension-blur-my-shell \
                            gnome-shell-extension-compiz-alike-magic-lamp-effect \
@@ -162,7 +164,14 @@ rm -v /etc/xdg/autostart/tracker-miner-fs-3.desktop
 rm -v /etc/xdg/autostart/tracker-miner-rss-3.desktop
 rm -v /etc/skel/.config/autostart/steam.desktop
 
-rm -rf /home/linuxbrew
+rm -v /usr/share/fish/vendor_conf.d/nano-default-editor.fish
+rm -v /usr/share/fish/vendor_conf.d/bazzite-neofetch.fish
+rm -v /usr/share/applications/gnome-ssh-askpass.desktop
+
+
+rm -rf /home/linuxbrew 
+rm -rf /usr/share/ublue-os/homebrew
+
 }
 cleanup
 

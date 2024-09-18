@@ -26,7 +26,7 @@ rpm-ostree override remove fedora-chromium-config fedora-chromium-config-gnome \
                            gnome-classic-session gnome-classic-session-xsession \
                            gnome-initial-setup gnome-shell-extension-apps-menu \
                            gnome-shell-extension-background-logo \
-                           gnome-shell-extension-launch-new-instance \
+                           #gnome-shell-extension-launch-new-instance \
                            gnome-shell-extension-places-menu \
                            gnome-shell-extension-window-list gnome-tour \
                            gnome-user-docs plocate yelp \

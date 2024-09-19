@@ -109,7 +109,8 @@ rpm-ostree install firejail firewall-config \
                    onlyoffice-desktopeditors libreoffice gedit foliate \
                    rsms-inter-fonts \
                    librewolf epiphany \
-                   gnome-logs gnome-power-manager gnome-firmware \
+<<'###'
+                   gnome-boxes gnome-logs gnome-power-manager gnome-firmware \
                    gnome-color-manager ptyxis blackbox-terminal \
                    gnome-calendar gnome-network-displays gnome-clocks cheese \
                    snapshot gnome-calculator gnome-weather gnome-sound-recorder \
@@ -119,6 +120,7 @@ rpm-ostree install firejail firewall-config \
                    uresourced irqbalance \
                    steam lutris bottles antimicrox protonplus goverlay gamescope \
                    gamemode mangohud vkBasalt fluidsynth wine winetricks protontricks
+###
 }
 install-pkgs
 

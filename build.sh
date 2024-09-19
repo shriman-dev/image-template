@@ -52,7 +52,8 @@ curl -Lo /etc/yum.repos.d/_scrcpy_copr.repo https://copr.fedorainfracloud.org/co
 rpm-ostree install https://download.onlyoffice.com/repo/centos/main/noarch/onlyoffice-repo.noarch.rpm
 curl -Lo /etc/yum.repos.d/_librewolf.repo https://rpm.librewolf.net/librewolf-repo.repo 
 curl -Lo /etc/yum.repos.d/_brave-browser.repo https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
-curl -Lo /etc/yum.repos.d/_resources.repo https://copr.fedorainfracloud.org/coprs/atim/resources/repo/fedora-${RELEASE}/atim-resources-fedora-${RELEASE}.repo
+curl -Lo /etc/yum.repos.d/_protonplus.repo https://copr.fedorainfracloud.org/coprs/wehagy/protonplus/repo/fedora-${RELEASE}/wehagy-protonplus-fedora-${RELEASE}.repo
+
 
 curl -Lo /usr/bin/btdu https://github.com/CyberShadow/btdu/releases/latest/download/btdu-static-x86_64
 chmod +x /usr/bin/btdu
@@ -62,10 +63,25 @@ unzip yazi-x86_64-unknown-linux-gnu.zip
 cp -v yazi-x86_64-unknown-linux-gnu/yazi /usr/bin/
 chmod +x /usr/bin/yazi
 
-codium_release=$( curl -s -X GET https://api.github.com/repos/VSCodium/vscodium/releases/latest | grep -o '"browser_download_url": "[^"]*.x86_64.rpm"' | cut -d'"' -f4)
-rpm-ostree install "${codium_release}"
-freetube_release=$(curl -s -X GET https://api.github.com/repos/FreeTubeApp/FreeTube/releases | grep -o '"browser_download_url": "[^"]*_amd64.rpm"' | head -n1 | cut -d'"' -f4)
-rpm-ostree install "${freetube_release}"
+rpm-ostree install  $(curl -s -X GET https://api.github.com/repos/VSCodium/vscodium/releases/latest | grep -i '"browser_download_url": "[^"]*.x86_64.rpm"' | cut -d'"' -f4)
+
+curl -Lo /usr/local/bin/upscayl $(https://github.com/upscayl/upscayl/releases/download/v2.11.5/upscayl-2.11.5-linux.AppImage)
+chmod +x /usr/local/bin/upscayl
+
+curl -Lo /usr/local/bin/freetube $(curl -s -X GET https://api.github.com/repos/FreeTubeApp/FreeTube/releases | grep -iom1 '"browser_download_url": "[^"]*.appimage"' | cut -d'"' -f4)
+chmod +x /usr/local/bin/freetube
+
+curl -Lo /usr/local/bin/mission-center $(curl -s https://gitlab.com/api/v4/projects/44426042/releases | grep -iom1 '"direct_asset_url":"[^"]*.appimage"' | head -n1 | cut -d'"' -f4)
+chmod +x /usr/local/bin/mission-center
+
+curl -Lo /usr/local/bin/heroic $(curl -s -X GET https://api.github.com/repos/Heroic-Games-Launcher/HeroicGamesLauncher/releases | grep -iom1 '"browser_download_url": "[^"]*.appimage"' | cut -d'"' -f4)
+chmod +x /usr/local/bin/heroic
+
+curl -Lo /usr/local/bin/localsend $(curl -s -X GET https://api.github.com/repos/localsend/localsend/releases | grep -iom1 '"browser_download_url": "[^"]*.appimage"' | cut -d'"' -f4)
+chmod +x /usr/local/bin/localsend
+
+curl -Lo /usr/local/bin/czkawka-gui $(curl -s -X GET https://api.github.com/repos/qarmin/czkawka/releases | grep -iom1 '"browser_download_url": "[^"]*.appimage"' | cut -d'"' -f4)
+chmod +x /usr/local/bin/czkawka-gui
 
 chmod +x ${SCRIPT_DIR}/configure/get-nerd-fonts.sh
 ${SCRIPT_DIR}/configure/get-nerd-fonts.sh
@@ -84,19 +100,20 @@ rpm-ostree install firejail firewall-config \
                    wlr-randr \
                    nautilus nautilus-extensions nautilus-python sushi \
                    vlc clapper gnome-music loupe meld evince file-roller \
-                   pinta inkscape pitivi \
-                   libreoffice gedit foliate rsms-inter-fonts \
-                   librewolf \
+                   pinta inkscape krita gimp3 rawtherapee pitivi shotcut \
+                   onlyoffice-desktopeditors libreoffice gedit foliate \
+                   rsms-inter-fonts \
+                   librewolf brave epiphany \
                    gnome-boxes gnome-logs gnome-power-manager gnome-firmware \
                    gnome-color-manager ptyxis blackbox-terminal \
-                   gnome-calendar gnome-network-displays gnome-clocks \
-                   gnome-calculator snapshot gnome-weather gnome-sound-recorder \
+                   gnome-calendar gnome-network-displays gnome-clocks cheese \
+                   snapshot gnome-calculator gnome-weather gnome-sound-recorder \
                    baobab dosfstools exfatprogs gpart gparted zstd dmraid vaults \
                    keepassxc \
                    metadata-cleaner bleachbit \
                    uresourced irqbalance \
-                   steam lutris bottles antimicrox goverlay gamescope gamemode \
-                   mangohud vkBasalt fluidsynth wine winetricks protontricks
+                   steam lutris bottles antimicrox protonplus goverlay gamescope \
+                   gamemode mangohud vkBasalt fluidsynth wine winetricks protontricks
 }
 install-pkgs
 

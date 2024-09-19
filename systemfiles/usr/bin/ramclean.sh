@@ -14,6 +14,7 @@ fwupd
 updatedb
 kdeconnectd
 ibus
+setroubleshootd
 gnome-calendar'
 #sssd_kcm
 #gvfsd-http

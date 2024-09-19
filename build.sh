@@ -27,7 +27,7 @@ rpm-ostree override remove fedora-chromium-config fedora-chromium-config-gnome \
                            fedora-flathub-remote fedora-workstation-backgrounds \
                            ibus-hangul ibus-libpinyin ibus-libzhuyin ibus-m17n \
                            ibus-mozc ibus-typing-booster gnome-browser-connector \
-                           gnome-user-docs plocate yelp \
+                           nautilus-gsconnect gnome-user-docs plocate yelp \
                            gnome-shell-extension-bazzite-menu \
                            gnome-shell-extension-blur-my-shell \
                            gnome-shell-extension-compiz-alike-magic-lamp-effect \
@@ -37,7 +37,7 @@ rpm-ostree override remove fedora-chromium-config fedora-chromium-config-gnome \
                            gnome-shell-extension-launch-new-instance \
                            gnome-shell-extension-places-menu \
                            gnome-shell-extension-window-list \
-                           openssh-askpass webapp-manager
+                           openssh-askpass webapp-manager steamdeck-backgrounds
 
 }
 debloat
@@ -49,20 +49,54 @@ install-pkgs() {
 #chmod +x /usr/bin/copr
 curl -Lo /etc/yum.repos.d/_starship_copr.repo  https://copr.fedorainfracloud.org/coprs/atim/starship/repo/fedora-${RELEASE}/atim-starship-fedora-${RELEASE}.repo
 curl -Lo /etc/yum.repos.d/_scrcpy_copr.repo https://copr.fedorainfracloud.org/coprs/zeno/scrcpy/repo/fedora-${RELEASE}/zeno-scrcpy-fedora-${RELEASE}.repo
-
+rpm-ostree install https://download.onlyoffice.com/repo/centos/main/noarch/onlyoffice-repo.noarch.rpm
 curl -Lo /etc/yum.repos.d/_librewolf.repo https://rpm.librewolf.net/librewolf-repo.repo 
+curl -Lo /etc/yum.repos.d/_brave-browser.repo https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
+curl -Lo /etc/yum.repos.d/_resources.repo https://copr.fedorainfracloud.org/coprs/atim/resources/repo/fedora-${RELEASE}/atim-resources-fedora-${RELEASE}.repo
 
-rpm-ostree install firejail firewall-config
+curl -Lo /usr/bin/btdu https://github.com/CyberShadow/btdu/releases/latest/download/btdu-static-x86_64
+chmod +x /usr/bin/btdu
 
-rpm-ostree install nautilus nautilus-extensions nautilus-python sushi
+curl -OL https://github.com/sxyazi/yazi/releases/download/v0.3.3/yazi-x86_64-unknown-linux-gnu.zip
+unzip yazi-x86_64-unknown-linux-gnu.zip
+cp -v yazi-x86_64-unknown-linux-gnu/yazi /usr/bin/
+chmod +x /usr/bin/yazi
 
-rpm-ostree install rsms-inter-fonts papirus-icon-theme
+codium_release=$( curl -s -X GET https://api.github.com/repos/VSCodium/vscodium/releases/latest | grep -o '"browser_download_url": "[^"]*.x86_64.rpm"' | cut -d'"' -f4)
+rpm-ostree install "${codium_release}"
+freetube_release=$(curl -s -X GET https://api.github.com/repos/FreeTubeApp/FreeTube/releases | grep -o '"browser_download_url": "[^"]*_amd64.rpm"' | head -n1 | cut -d'"' -f4)
+rpm-ostree install "${freetube_release}"
 
-rpm-ostree install filelight dosfstools exfatprogs gpart gparted zstd dmraid
+chmod +x ${SCRIPT_DIR}/configure/get-nerd-fonts.sh
+${SCRIPT_DIR}/configure/get-nerd-fonts.sh
 
-rpm-ostree install bottles fluidsynth gamescope goverlay 
-
-rpm-ostree install uresourced irqbalance
+rpm-ostree install firejail firewall-config \
+                   fish bat eza starship fastfetch \
+                   compsize btop htop fio tree rclone cryfs archivemount borgbackup \
+                   hwinfo tmux tldr which wmctrl brightnessctl aria2 ffmpeg \
+                   cava asciinema asciiquarium cmatrix oneko sl cbonsai neo cowsay \
+                   python3-pip micro neovim git sassc android-tools scrcpy \
+                   syncthing \
+                   libappindicator libappindicator-gtk3 libgtop2 papirus-icon-theme \
+                   gnome-menus gnome-themes-extra gtk-murrine-engine gtk2-engines \
+                   dconf-editor gnome-tweaks gnome-characters gnome-extensions-app \
+                   menulibre qt5ct kvantum gnome-characters gnome-randr-rust \
+                   wlr-randr \
+                   nautilus nautilus-extensions nautilus-python sushi \
+                   vlc clapper gnome-music loupe meld evince file-roller \
+                   pinta inkscape pitivi \
+                   libreoffice gedit foliate rsms-inter-fonts \
+                   librewolf \
+                   gnome-boxes gnome-logs gnome-power-manager gnome-firmware \
+                   gnome-color-manager ptyxis blackbox-terminal \
+                   gnome-calendar gnome-network-displays gnome-clocks \
+                   gnome-calculator snapshot gnome-weather gnome-sound-recorder \
+                   baobab dosfstools exfatprogs gpart gparted zstd dmraid vaults \
+                   keepassxc \
+                   metadata-cleaner bleachbit \
+                   uresourced irqbalance \
+                   steam lutris bottles antimicrox goverlay gamescope gamemode \
+                   mangohud vkBasalt fluidsynth wine winetricks protontricks
 }
 install-pkgs
 

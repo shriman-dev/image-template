@@ -86,24 +86,24 @@ systemctl --global mask tracker-miner-fs-3.servicee \
                         tracker-miner-rss-3.service tracker-writeback-3.service \
                         tracker-xdg-portal-3.service
 
-rm -v /usr/lib/systemd/system/brew-dir-fix.service
-rm -v /usr/lib/systemd/system/brew-setup.service
-rm -v /usr/lib/systemd/system/brew-update.service
-rm -v /usr/lib/systemd/system/brew-upgrade.service
+rm -fv /usr/lib/systemd/system/brew-dir-fix.service
+rm -fv /usr/lib/systemd/system/brew-setup.service
+rm -fv /usr/lib/systemd/system/brew-update.service
+rm -fv /usr/lib/systemd/system/brew-upgrade.service
 
 rm -rf /home/linuxbrew 
 rm -rf /usr/share/ublue-os/homebrew
 
-rm -v /etc/xdg/autostart/ibus-mozc-launch-xwayland.desktop
-rm -v /etc/xdg/autostart/nvidia-settings-load.desktop
-rm -v /etc/xdg/autostart/org.gnome.Software.desktop
-rm -v /etc/xdg/autostart/tracker-miner-fs-3.desktop
-rm -v /etc/xdg/autostart/tracker-miner-rss-3.desktop
-rm -v /etc/skel/.config/autostart/steam.desktop
+rm -fv /etc/xdg/autostart/ibus-mozc-launch-xwayland.desktop
+rm -fv /etc/xdg/autostart/nvidia-settings-load.desktop
+rm -fv /etc/xdg/autostart/org.gnome.Software.desktop
+rm -fv /etc/xdg/autostart/tracker-miner-fs-3.desktop
+rm -fv /etc/xdg/autostart/tracker-miner-rss-3.desktop
+rm -fv /etc/skel/.config/autostart/steam.desktop
 
-rm -v /usr/share/fish/vendor_conf.d/nano-default-editor.fish
-rm -v /usr/share/fish/vendor_conf.d/bazzite-neofetch.fish
-rm -v /usr/share/applications/gnome-ssh-askpass.desktop
+rm -fv /usr/share/fish/vendor_conf.d/nano-default-editor.fish
+rm -fv /usr/share/fish/vendor_conf.d/bazzite-neofetch.fish
+rm -fv /usr/share/applications/gnome-ssh-askpass.desktop
 }
 cleanup
 

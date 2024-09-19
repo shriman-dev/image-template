@@ -63,9 +63,9 @@ unzip yazi-x86_64-unknown-linux-gnu.zip
 cp -v yazi-x86_64-unknown-linux-gnu/yazi /usr/bin/
 chmod +x /usr/bin/yazi
 
-rpm-ostree install  $(curl -s -X GET https://api.github.com/repos/VSCodium/vscodium/releases/latest | grep -i '"browser_download_url": "[^"]*.x86_64.rpm"' | cut -d'"' -f4)
+rpm-ostree install $(curl -s -X GET https://api.github.com/repos/VSCodium/vscodium/releases/latest | grep -i '"browser_download_url": "[^"]*.x86_64.rpm"' | cut -d'"' -f4)
 
-curl -Lo /usr/local/bin/upscayl $(https://github.com/upscayl/upscayl/releases/download/v2.11.5/upscayl-2.11.5-linux.AppImage)
+curl -Lo /usr/local/bin/upscayl $(curl -s -X GET https://api.github.com/repos/upscayl/upscayl/releases | grep -im1 '"browser_download_url": "[^"]*.appimage"' | cut -d'"' -f4)
 chmod +x /usr/local/bin/upscayl
 
 curl -Lo /usr/local/bin/freetube $(curl -s -X GET https://api.github.com/repos/FreeTubeApp/FreeTube/releases | grep -iom1 '"browser_download_url": "[^"]*.appimage"' | cut -d'"' -f4)

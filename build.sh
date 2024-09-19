@@ -68,21 +68,19 @@ install-pkgs
 
 
 cleanup() {
+rm -rf /home/linuxbrew 
+rm -rf /usr/share/ublue-os/homebrew
 rm -vf /usr/lib/systemd/system/brew-dir-fix.service
 rm -vf /usr/lib/systemd/system/brew-setup.service
 rm -vf /usr/lib/systemd/system/brew-update.service
 rm -vf /usr/lib/systemd/system/brew-upgrade.service
-
-rm -rf /home/linuxbrew 
-rm -rf /usr/share/ublue-os/homebrew
-
 systemctl disable brew-dir-fix.service brew-setup.service brew-update.service \
                   brew-upgrade.service
 
 systemctl disable input-remapper.service NetworkManager-wait-online.service \
                   systemd-networkd-wait-online.service
 
-systemctl disable sshd.service
+systemctl  disable sshd.service
 systemctl --global mask sshd.service
 
 systemctl --global mask tracker-miner-fs-3.servicee \
@@ -101,7 +99,7 @@ rm -vf /etc/xdg/autostart/nvidia-settings-load.desktop
 rm -vf /etc/xdg/autostart/org.gnome.Software.desktop
 rm -vf /etc/xdg/autostart/tracker-miner-fs-3.desktop
 rm -vf /etc/xdg/autostart/tracker-miner-rss-3.desktop
-rm -vf /etc/skel/.config/autostart/steam.desktop
+rm -rvf /etc/skel/*
 
 rm -vf /usr/share/fish/vendor_conf.d/nano-default-editor.fish
 rm -vf /usr/share/fish/vendor_conf.d/bazzite-neofetch.fish
@@ -125,7 +123,6 @@ systemctl enable nix.mount fstrim.timer \
 performance-and-compatibility
 
 configurations() {
-
 sed -i 's/"pip3", //g' /usr/share/ublue-os/topgrade.toml
 
 cp -r ${SCRIPT_DIR}/configure/plymouth-themes/* /usr/share/plymouth/themes

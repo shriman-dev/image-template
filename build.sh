@@ -63,8 +63,6 @@ chmod +x /usr/bin/yazi
 
 rpm-ostree install $(curl -s -X GET https://api.github.com/repos/VSCodium/vscodium/releases/latest | grep -i '"browser_download_url": "[^"]*.x86_64.rpm"' | cut -d'"' -f4)
 
-rpm-ostree install $(curl -s -X GET https://api.github.com/repos/Heroic-Games-Launcher/HeroicGamesLauncher/releases/latest | grep -i '"browser_download_url": "[^"]*.x86_64.rpm"' | cut -d'"' -f4)
-
 mkdir -p /var/local/appimages
 
 curl -Lo /var/local/appimages/onlyoffice $(curl -s -X GET https://api.github.com/repos/ONLYOFFICE/DesktopEditors/releases | grep -im1 '"browser_download_url": "[^"]*x86_64.appimage"' | cut -d'"' -f4)

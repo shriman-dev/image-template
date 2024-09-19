@@ -23,9 +23,8 @@ debloat() {
 #gnome-shell-extension-hotedg \
 rpm-ostree override remove fedora-chromium-config fedora-chromium-config-gnome \
                            fedora-flathub-remote fedora-workstation-backgrounds \
-                           ibus-hangul ibus-libpinyin \
-                           ibus-libzhuyin ibus-m17n ibus-mozc ibus-setup \
-                           ibus-typing-booster \
+                           ibus-hangul ibus-libpinyin ibus-libzhuyin \
+                           ibus-m17n ibus-mozc ibus-typing-booster \
                            gnome-browser-connector \
                            gnome-user-docs plocate yelp \
                            gnome-shell-extension-bazzite-menu \

@@ -6,18 +6,9 @@ RELEASE="$(rpm -E %fedora)"
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 grub-kargs() {
-rpm-ostree kargs --append-if-missing=rd.luks.options=discard \
-                 --append-if-missing=rd.udev.log_priority=3 \
-                 --append-if-missing=loglevel=3 \
-                 --append-if-missing=sysrq_always_enabled=1 \
-                 --append-if-missing=nowatchdog \
-                 --append-if-missing=amdgpu.ppfeaturemask=0xffffffff \
-                 --append-if-missing=processor.ignore_ppc=1 \
-                 --append-if-missing=split_lock_detect=off \
-                 --append-if-missing=pci=noats
-#--append-if-missing=amdgpu.gttsize=3000
+sed -i 's/NEEDED_KARGS=()/NEEDED_KARGS=( "--append-if-missing=rd.luks=discard" "--append-if-missing=rd.udev.log_priority=3" "--append-if-missing=loglevel=3 " "--append-if-missing=nowatchdog" "--append-if-missing=sysrq_always_enabled=1" "--append-if-missing=amdgpu.ppfeaturemask=0xffffffff" "--append-if-missing=processor.ignore_ppc=1" "--append-if-missing=preempt=ful" "--append-if-missing=split_lock_detect=off" "--append-if-missing=pci=noats")/g' /usr/libexec/bazzite-hardware-setup
 }
-
+grub-kargs
 
 debloat() {
 #firefox firefox-langpacks \
@@ -32,6 +23,9 @@ debloat() {
 #gnome-shell-extension-hotedg \
 rpm-ostree override remove fedora-chromium-config fedora-chromium-config-gnome \
                            fedora-flathub-remote fedora-workstation-backgrounds \
+                           ibus ibus-anthy ibus-anthy-python ibus-gtk2 ibus-gtk3 \
+                           ibus-gtk4 ibus-hangul ibus-libpinyin ibus-libzhuyin \
+                           ibus-m17n ibus-mozc ibus-setup ibus-typing-booster \
                            gnome-browser-connector \
                            gnome-user-docs plocate yelp \
                            gnome-shell-extension-bazzite-menu \
@@ -44,7 +38,6 @@ rpm-ostree override remove fedora-chromium-config fedora-chromium-config-gnome \
                            gnome-shell-extension-places-menu \
                            gnome-shell-extension-window-list \
                            openssh-askpass webapp-manager
-
 
 }
 debloat
@@ -59,10 +52,12 @@ curl -Lo /etc/yum.repos.d/_scrcpy_copr.repo https://copr.fedorainfracloud.org/co
 
 curl -Lo /etc/yum.repos.d/_librewolf.repo https://rpm.librewolf.net/librewolf-repo.repo 
 
-rpm-ostree install firejail firewall-config setools-gui
+rpm-ostree upgrade
 
-rpm-ostree install nautilus nautilus-extensions nautilus-python sushi \
-                   nautilus-gsconnect
+
+rpm-ostree install firejail firewall-config
+
+rpm-ostree install nautilus nautilus-extensions nautilus-python sushi
 
 rpm-ostree install rsms-inter-fonts papirus-icon-theme
 
@@ -76,22 +71,33 @@ install-pkgs
 
 
 cleanup() {
+
+systemctl disable brew-dir-fix.service brew-setup.service brew-update.service \
+                  brew-upgrade.service
+
+systemctl disable input-remapper.servic NetworkManager-wait-online.service \
+                  systemd-networkd-wait-online.service
+
+systemctl disable tracker-miner-fs-3.servicee tracker-miner-fs-control-3.service \
+                  tracker-miner-rss-3.service tracker-writeback-3.service \
+                  tracker-xdg-portal-3.service
+
+systemctl disable sshd.service
+
+systemctl --global mask sshd.service
+
+systemctl --global mask tracker-miner-fs-3.servicee \
+                        tracker-miner-fs-control-3.service \
+                        tracker-miner-rss-3.service tracker-writeback-3.service \
+                        tracker-xdg-portal-3.service
+
 rm -v /usr/lib/systemd/system/brew-dir-fix.service
 rm -v /usr/lib/systemd/system/brew-setup.service
 rm -v /usr/lib/systemd/system/brew-update.service
 rm -v /usr/lib/systemd/system/brew-upgrade.service
-rm -v /usr/lib/systemd/system/NetworkManager-wait-online.service
-rm -v /usr/lib/systemd/system/systemd-networkd-wait-online.service
-rm -v /usr/lib/systemd/user/tracker-miner-fs-3.service
-rm -v /usr/lib/systemd/user/tracker-miner-fs-control-3.service
-rm -v /usr/lib/systemd/user/tracker-miner-rss-3.service
-rm -v /usr/lib/systemd/user/tracker-writeback-3.service
-rm -v /usr/lib/systemd/user/tracker-xdg-portal-3.service
-rm -v /usr/lib/systemd/user/ssh-agent.service
-rm -v /usr/lib/systemd/user/gcr-ssh-agent.service
-rm -v /usr/lib/systemd/system/ssh-host-keys-migration.service
-rm -v /usr/lib/systemd/system/sshd.service
-rm -v /usr/lib/systemd/system/sssd-ssh.service
+
+rm -rf /home/linuxbrew 
+rm -rf /usr/share/ublue-os/homebrew
 
 rm -v /etc/xdg/autostart/nvidia-settings-load.desktop
 rm -v /etc/xdg/autostart/org.gnome.Software.desktop
@@ -102,11 +108,6 @@ rm -v /etc/skel/.config/autostart/steam.desktop
 rm -v /usr/share/fish/vendor_conf.d/nano-default-editor.fish
 rm -v /usr/share/fish/vendor_conf.d/bazzite-neofetch.fish
 rm -v /usr/share/applications/gnome-ssh-askpass.desktop
-
-
-rm -rf /home/linuxbrew 
-rm -rf /usr/share/ublue-os/homebrew
-
 }
 cleanup
 
@@ -125,6 +126,9 @@ systemctl enable nix.mount \
 performance-and-compatibility
 
 configurations() {
+
+sed -i 's/"pip3", //g' /usr/share/ublue-os/topgrade.toml
+
 cp -r ${SCRIPT_DIR}/configure/plymouth-themes/* /usr/share/plymouth/themes
 cp -r ${SCRIPT_DIR}/configure/gtk-themes/* /usr/share/themes
 cp -r ${SCRIPT_DIR}/configure/icons/* /usr/share/icons

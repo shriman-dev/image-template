@@ -2,7 +2,7 @@
 Description=everyFewMins
 
 [Timer]
-OnUnitActiveSec=300s
+OnUnitActiveSec=90s
 
 [Install]
 WantedBy=timers.target

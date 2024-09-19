@@ -68,19 +68,21 @@ install-pkgs
 
 
 cleanup() {
+rm -vf /usr/lib/systemd/system/brew-dir-fix.service
+rm -vf /usr/lib/systemd/system/brew-setup.service
+rm -vf /usr/lib/systemd/system/brew-update.service
+rm -vf /usr/lib/systemd/system/brew-upgrade.service
+
+rm -rf /home/linuxbrew 
+rm -rf /usr/share/ublue-os/homebrew
 
 systemctl disable brew-dir-fix.service brew-setup.service brew-update.service \
                   brew-upgrade.service
 
-systemctl disable input-remapper.servic NetworkManager-wait-online.service \
+systemctl disable input-remapper.service NetworkManager-wait-online.service \
                   systemd-networkd-wait-online.service
 
-systemctl disable tracker-miner-fs-3.servicee tracker-miner-fs-control-3.service \
-                  tracker-miner-rss-3.service tracker-writeback-3.service \
-                  tracker-xdg-portal-3.service
-
 systemctl disable sshd.service
-
 systemctl --global mask sshd.service
 
 systemctl --global mask tracker-miner-fs-3.servicee \
@@ -88,38 +90,37 @@ systemctl --global mask tracker-miner-fs-3.servicee \
                         tracker-miner-rss-3.service tracker-writeback-3.service \
                         tracker-xdg-portal-3.service
 
-rm -fv /usr/lib/systemd/system/brew-dir-fix.service
-rm -fv /usr/lib/systemd/system/brew-setup.service
-rm -fv /usr/lib/systemd/system/brew-update.service
-rm -fv /usr/lib/systemd/system/brew-upgrade.service
+rm -v /usr/lib/systemd/user/tracker-miner-fs-3.service
+rm -v /usr/lib/systemd/user/tracker-miner-fs-control-3.service
+rm -v /usr/lib/systemd/user/tracker-miner-rss-3.service
+rm -v /usr/lib/systemd/user/tracker-writeback-3.service
+rm -v /usr/lib/systemd/user/tracker-xdg-portal-3.service
 
-rm -rf /home/linuxbrew 
-rm -rf /usr/share/ublue-os/homebrew
+rm -vf /etc/xdg/autostart/ibus-mozc-launch-xwayland.desktop
+rm -vf /etc/xdg/autostart/nvidia-settings-load.desktop
+rm -vf /etc/xdg/autostart/org.gnome.Software.desktop
+rm -vf /etc/xdg/autostart/tracker-miner-fs-3.desktop
+rm -vf /etc/xdg/autostart/tracker-miner-rss-3.desktop
+rm -vf /etc/skel/.config/autostart/steam.desktop
 
-rm -fv /etc/xdg/autostart/ibus-mozc-launch-xwayland.desktop
-rm -fv /etc/xdg/autostart/nvidia-settings-load.desktop
-rm -fv /etc/xdg/autostart/org.gnome.Software.desktop
-rm -fv /etc/xdg/autostart/tracker-miner-fs-3.desktop
-rm -fv /etc/xdg/autostart/tracker-miner-rss-3.desktop
-rm -fv /etc/skel/.config/autostart/steam.desktop
-
-rm -fv /usr/share/fish/vendor_conf.d/nano-default-editor.fish
-rm -fv /usr/share/fish/vendor_conf.d/bazzite-neofetch.fish
-rm -fv /usr/share/applications/gnome-ssh-askpass.desktop
+rm -vf /usr/share/fish/vendor_conf.d/nano-default-editor.fish
+rm -vf /usr/share/fish/vendor_conf.d/bazzite-neofetch.fish
+rm -vf /usr/share/applications/gnome-ssh-askpass.desktop
 }
 cleanup
 
 
 performance-and-compatibility() {
+sed -i "s|.*issue_discards =.*|issue_discards = 1|"  /etc/lvm/lvm.conf
+
 cp -rv ${SCRIPT_DIR}/systemfiles/* /
 
 chmod +x /usr/bin/buttersnap.sh
 chmod +x /usr/bin/performance-tweaks.sh
 chmod +x /usr/bin/ramclean.sh
 
-systemctl enable nix.mount \
+systemctl enable nix.mount fstrim.timer \
                  everyFewMins.service everyFewMins.timer
-
 }
 performance-and-compatibility
 
@@ -133,12 +134,5 @@ cp -r ${SCRIPT_DIR}/configure/icons/* /usr/share/icons
 }
 configurations
 
-drive-care() {
-sed -i "s|.*issue_discards =.*|issue_discards = 1|"  /etc/lvm/lvm.conf
-systemctl enable fstrim.timer
-#sudo systemctl daemon-reload && sudo systemctl restart cryptsetup.target
-#sudo mount -a -m -o x-gvfs-hide
-}
-drive-care
 
 

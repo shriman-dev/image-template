@@ -90,11 +90,11 @@ systemctl --global mask tracker-miner-fs-3.servicee \
                         tracker-miner-rss-3.service tracker-writeback-3.service \
                         tracker-xdg-portal-3.service
 
-rm -v /usr/lib/systemd/user/tracker-miner-fs-3.service
-rm -v /usr/lib/systemd/user/tracker-miner-fs-control-3.service
-rm -v /usr/lib/systemd/user/tracker-miner-rss-3.service
-rm -v /usr/lib/systemd/user/tracker-writeback-3.service
-rm -v /usr/lib/systemd/user/tracker-xdg-portal-3.service
+rm -vf /usr/lib/systemd/user/tracker-miner-fs-3.service
+rm -vf /usr/lib/systemd/user/tracker-miner-fs-control-3.service
+rm -vf /usr/lib/systemd/user/tracker-miner-rss-3.service
+rm -vf /usr/lib/systemd/user/tracker-writeback-3.service
+rm -vf /usr/lib/systemd/user/tracker-xdg-portal-3.service
 
 rm -vf /etc/xdg/autostart/ibus-mozc-launch-xwayland.desktop
 rm -vf /etc/xdg/autostart/nvidia-settings-load.desktop

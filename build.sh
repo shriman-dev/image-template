@@ -50,9 +50,6 @@ curl -Lo /etc/yum.repos.d/_scrcpy_copr.repo https://copr.fedorainfracloud.org/co
 
 curl -Lo /etc/yum.repos.d/_librewolf.repo https://rpm.librewolf.net/librewolf-repo.repo 
 
-rpm-ostree upgrade
-
-
 rpm-ostree install firejail firewall-config
 
 rpm-ostree install nautilus nautilus-extensions nautilus-python sushi

@@ -109,7 +109,7 @@ rpm-ostree install firejail firewall-config \
                    onlyoffice-desktopeditors libreoffice gedit foliate \
                    rsms-inter-fonts \
                    librewolf epiphany \
-                   gnome-boxes gnome-logs gnome-power-manager gnome-firmware \
+                   gnome-logs gnome-power-manager gnome-firmware \
                    gnome-color-manager ptyxis blackbox-terminal \
                    gnome-calendar gnome-network-displays gnome-clocks cheese \
                    snapshot gnome-calculator gnome-weather gnome-sound-recorder \

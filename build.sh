@@ -105,11 +105,11 @@ rpm-ostree install firejail firewall-config \
                    wlr-randr \
                    nautilus nautilus-extensions nautilus-python sushi \
                    vlc clapper gnome-music loupe meld evince file-roller \
+<<'###'
                    pinta inkscape krita gimp3 rawtherapee pitivi shotcut \
                    onlyoffice-desktopeditors libreoffice gedit foliate \
                    rsms-inter-fonts \
                    librewolf epiphany \
-<<'###'
                    gnome-boxes gnome-logs gnome-power-manager gnome-firmware \
                    gnome-color-manager ptyxis blackbox-terminal \
                    gnome-calendar gnome-network-displays gnome-clocks cheese \

@@ -6,7 +6,9 @@ RELEASE="$(rpm -E %fedora)"
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 grub-kargs() {
-sed -i 's/NEEDED_KARGS=()/NEEDED_KARGS=( "--append-if-missing=rd.luks=discard" "--append-if-missing=rd.udev.log_priority=3" "--append-if-missing=loglevel=3 " "--append-if-missing=nowatchdog" "--append-if-missing=sysrq_always_enabled=1" "--append-if-missing=amdgpu.ppfeaturemask=0xffffffff" "--append-if-missing=processor.ignore_ppc=1" "--append-if-missing=preempt=ful" "--append-if-missing=split_lock_detect=off" "--append-if-missing=pci=noats")/g' /usr/libexec/bazzite-hardware-setup
+KARGS="--append-if-missing=rd.luks=discard --append-if-missing=rd.udev.log_priority=3 --append-if-missing=loglevel=3 --append-if-missing=nowatchdog --append-if-missing=sysrq_always_enabled=1 --append-if-missing=amdgpu.ppfeaturemask=0xffffffff --append-if-missing=processor.ignore_ppc=1 --append-if-missing=preempt=full --append-if-missing=split_lock_detect=off --append-if-missing=pci=noats"
+
+sed -i "s/--append-if-missing=preempt=full/${KARGS}/" /usr/libexec/bazzite-hardware-setup
 }
 grub-kargs
 

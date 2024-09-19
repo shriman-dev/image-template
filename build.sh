@@ -61,16 +61,15 @@ unzip yazi-x86_64-unknown-linux-gnu.zip
 cp -v yazi-x86_64-unknown-linux-gnu/yazi /usr/bin/
 chmod +x /usr/bin/yazi
 
-
-rpm-ostree install $(curl -s -X GET https://api.github.com/repos/ONLYOFFICE/DesktopEditors/releases | grep -im1 '"browser_download_url": "[^"]*.x86_64.rpm"' | cut -d'"' -f4)
-
 rpm-ostree install $(curl -s -X GET https://api.github.com/repos/VSCodium/vscodium/releases/latest | grep -i '"browser_download_url": "[^"]*.x86_64.rpm"' | cut -d'"' -f4)
 
 rpm-ostree install $(curl -s -X GET https://api.github.com/repos/Heroic-Games-Launcher/HeroicGamesLauncher/releases/latest | grep -i '"browser_download_url": "[^"]*.x86_64.rpm"' | cut -d'"' -f4)
 
-
-
 mkdir -p /var/local/appimages
+
+curl -Lo /var/local/appimages/onlyoffice $(curl -s -X GET https://api.github.com/repos/ONLYOFFICE/DesktopEditors/releases | grep -im1 '"browser_download_url": "[^"]*x86_64.appimage"' | cut -d'"' -f4)
+chmod +x /var/local/appimages/onlyoffice
+
 curl -Lo /var/local/appimages/upscayl $(curl -s -X GET https://api.github.com/repos/upscayl/upscayl/releases | grep -im1 '"browser_download_url": "[^"]*.appimage"' | cut -d'"' -f4)
 chmod +x /var/local/appimages/upscayl
 

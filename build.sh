@@ -65,7 +65,7 @@ chmod +x /usr/bin/yazi
 
 rpm-ostree install $(curl -s -X GET https://api.github.com/repos/VSCodium/vscodium/releases/latest | grep -i '"browser_download_url": "[^"]*.x86_64.rpm"' | cut -d'"' -f4)
 
-mkdir /var/local/appimages
+mkdir -p /var/local/appimages
 
 curl -Lo /var/local/appimages/upscayl $(curl -s -X GET https://api.github.com/repos/upscayl/upscayl/releases | grep -im1 '"browser_download_url": "[^"]*.appimage"' | cut -d'"' -f4)
 chmod +x /var/local/appimages/upscayl

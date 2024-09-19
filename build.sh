@@ -23,7 +23,7 @@ debloat() {
 #gnome-shell-extension-hotedg \
 rpm-ostree override remove fedora-chromium-config fedora-chromium-config-gnome \
                            fedora-flathub-remote fedora-workstation-backgrounds \
-                           ibus-anthy ibus-anthy-python ibus-hangul ibus-libpinyin \
+                           ibus-hangul ibus-libpinyin \
                            ibus-libzhuyin ibus-m17n ibus-mozc ibus-setup \
                            ibus-typing-booster \
                            gnome-browser-connector \
@@ -99,6 +99,7 @@ rm -v /usr/lib/systemd/system/brew-upgrade.service
 rm -rf /home/linuxbrew 
 rm -rf /usr/share/ublue-os/homebrew
 
+rm -v /etc/xdg/autostart/ibus-mozc-launch-xwayland.desktop
 rm -v /etc/xdg/autostart/nvidia-settings-load.desktop
 rm -v /etc/xdg/autostart/org.gnome.Software.desktop
 rm -v /etc/xdg/autostart/tracker-miner-fs-3.desktop

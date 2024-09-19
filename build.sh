@@ -65,21 +65,27 @@ chmod +x /usr/bin/yazi
 
 rpm-ostree install $(curl -s -X GET https://api.github.com/repos/VSCodium/vscodium/releases/latest | grep -i '"browser_download_url": "[^"]*.x86_64.rpm"' | cut -d'"' -f4)
 
+touch /usr/local/bin/upscayl
 curl -Lo /usr/local/bin/upscayl $(curl -s -X GET https://api.github.com/repos/upscayl/upscayl/releases | grep -im1 '"browser_download_url": "[^"]*.appimage"' | cut -d'"' -f4)
 chmod +x /usr/local/bin/upscayl
 
+touch /usr/local/bin/freetube
 curl -Lo /usr/local/bin/freetube $(curl -s -X GET https://api.github.com/repos/FreeTubeApp/FreeTube/releases | grep -iom1 '"browser_download_url": "[^"]*.appimage"' | cut -d'"' -f4)
 chmod +x /usr/local/bin/freetube
 
+touch /usr/local/bin/mission-center
 curl -Lo /usr/local/bin/mission-center $(curl -s https://gitlab.com/api/v4/projects/44426042/releases | grep -iom1 '"direct_asset_url":"[^"]*.appimage"' | head -n1 | cut -d'"' -f4)
 chmod +x /usr/local/bin/mission-center
 
+touch /usr/local/bin/heroic
 curl -Lo /usr/local/bin/heroic $(curl -s -X GET https://api.github.com/repos/Heroic-Games-Launcher/HeroicGamesLauncher/releases | grep -iom1 '"browser_download_url": "[^"]*.appimage"' | cut -d'"' -f4)
 chmod +x /usr/local/bin/heroic
 
+touch /usr/local/bin/localsend
 curl -Lo /usr/local/bin/localsend $(curl -s -X GET https://api.github.com/repos/localsend/localsend/releases | grep -iom1 '"browser_download_url": "[^"]*.appimage"' | cut -d'"' -f4)
 chmod +x /usr/local/bin/localsend
 
+touch /usr/local/bin/czkawka-gui
 curl -Lo /usr/local/bin/czkawka-gui $(curl -s -X GET https://api.github.com/repos/qarmin/czkawka/releases | grep -iom1 '"browser_download_url": "[^"]*.appimage"' | cut -d'"' -f4)
 chmod +x /usr/local/bin/czkawka-gui
 

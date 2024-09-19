@@ -65,35 +65,29 @@ chmod +x /usr/bin/yazi
 
 rpm-ostree install $(curl -s -X GET https://api.github.com/repos/VSCodium/vscodium/releases/latest | grep -i '"browser_download_url": "[^"]*.x86_64.rpm"' | cut -d'"' -f4)
 
-mkdir /usr/local/bin/
+mkdir /var/local/appimages
 
-curl -Lo upscayl $(curl -s -X GET https://api.github.com/repos/upscayl/upscayl/releases | grep -im1 '"browser_download_url": "[^"]*.appimage"' | cut -d'"' -f4)
-cp -v upscayl /usr/local/bin/
-chmod +x /usr/local/bin/upscayl
+curl -Lo /var/local/appimages/upscayl $(curl -s -X GET https://api.github.com/repos/upscayl/upscayl/releases | grep -im1 '"browser_download_url": "[^"]*.appimage"' | cut -d'"' -f4)
+chmod +x /var/local/appimages/upscayl
 
-curl -Lo freetube $(curl -s -X GET https://api.github.com/repos/FreeTubeApp/FreeTube/releases | grep -iom1 '"browser_download_url": "[^"]*.appimage"' | cut -d'"' -f4)
-cp -v freetube /usr/local/bin/
-chmod +x /usr/local/bin/freetube
+curl -Lo /var/local/appimages/freetube $(curl -s -X GET https://api.github.com/repos/FreeTubeApp/FreeTube/releases | grep -iom1 '"browser_download_url": "[^"]*.appimage"' | cut -d'"' -f4)
+chmod +x /var/local/appimages/freetube
 
 
-curl -Lo mission-center $(curl -s https://gitlab.com/api/v4/projects/44426042/releases | grep -iom1 '"direct_asset_url":"[^"]*.appimage"' | head -n1 | cut -d'"' -f4)
-cp -v mission-center /usr/local/bin/
-chmod +x /usr/local/bin/mission-center
+curl -Lo /var/local/appimages/mission-center $(curl -s https://gitlab.com/api/v4/projects/44426042/releases | grep -iom1 '"direct_asset_url":"[^"]*.appimage"' | head -n1 | cut -d'"' -f4)
+chmod +x /var/local/appimages/mission-center
 
 
-curl -Lo heroic $(curl -s -X GET https://api.github.com/repos/Heroic-Games-Launcher/HeroicGamesLauncher/releases | grep -iom1 '"browser_download_url": "[^"]*.appimage"' | cut -d'"' -f4)
-cp -v heroic /usr/local/bin/
-chmod +x /usr/local/bin/heroic
+curl -Lo /var/local/appimages/heroic $(curl -s -X GET https://api.github.com/repos/Heroic-Games-Launcher/HeroicGamesLauncher/releases | grep -iom1 '"browser_download_url": "[^"]*.appimage"' | cut -d'"' -f4)
+chmod +x /var/local/appimages/heroic
 
 
-curl -Lo localsend $(curl -s -X GET https://api.github.com/repos/localsend/localsend/releases | grep -iom1 '"browser_download_url": "[^"]*.appimage"' | cut -d'"' -f4)
-cp -v localsend /usr/local/bin/
-chmod +x /usr/local/bin/localsend
+curl -Lo /var/local/appimages/localsend $(curl -s -X GET https://api.github.com/repos/localsend/localsend/releases | grep -iom1 '"browser_download_url": "[^"]*.appimage"' | cut -d'"' -f4)
+chmod +x /var/local/appimages/localsend
 
 
-curl -Lo czkawka-gui $(curl -s -X GET https://api.github.com/repos/qarmin/czkawka/releases | grep -iom1 '"browser_download_url": "[^"]*.appimage"' | cut -d'"' -f4)
-cp -v czkawka-gui /usr/local/bin/
-chmod +x /usr/local/bin/czkawka-gui
+curl -Lo /var/local/appimages/czkawka-gui $(curl -s -X GET https://api.github.com/repos/qarmin/czkawka/releases | grep -iom1 '"browser_download_url": "[^"]*.appimage"' | cut -d'"' -f4)
+chmod +x /var/local/appimages/czkawka-gui
 
 chmod +x ${SCRIPT_DIR}/configure/get-nerd-fonts.sh
 ${SCRIPT_DIR}/configure/get-nerd-fonts.sh

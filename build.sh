@@ -50,8 +50,7 @@ install-pkgs() {
 curl -Lo /etc/yum.repos.d/_starship_copr.repo  https://copr.fedorainfracloud.org/coprs/atim/starship/repo/fedora-${RELEASE}/atim-starship-fedora-${RELEASE}.repo
 curl -Lo /etc/yum.repos.d/_scrcpy_copr.repo https://copr.fedorainfracloud.org/coprs/zeno/scrcpy/repo/fedora-${RELEASE}/zeno-scrcpy-fedora-${RELEASE}.repo
 rpm-ostree install https://download.onlyoffice.com/repo/centos/main/noarch/onlyoffice-repo.noarch.rpm
-curl -Lo /etc/yum.repos.d/_librewolf.repo https://rpm.librewolf.net/librewolf-repo.repo 
-curl -Lo /etc/yum.repos.d/_brave-browser.repo https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
+curl -Lo /etc/yum.repos.d/_librewolf.repo https://rpm.librewolf.net/librewolf-repo.repo
 curl -Lo /etc/yum.repos.d/_protonplus.repo https://copr.fedorainfracloud.org/coprs/wehagy/protonplus/repo/fedora-${RELEASE}/wehagy-protonplus-fedora-${RELEASE}.repo
 
 
@@ -109,12 +108,12 @@ rpm-ostree install firejail firewall-config \
                    pinta inkscape krita gimp3 rawtherapee pitivi shotcut \
                    onlyoffice-desktopeditors libreoffice gedit foliate \
                    rsms-inter-fonts \
-                   librewolf brave epiphany \
+                   librewolf epiphany \
                    gnome-boxes gnome-logs gnome-power-manager gnome-firmware \
                    gnome-color-manager ptyxis blackbox-terminal \
                    gnome-calendar gnome-network-displays gnome-clocks cheese \
                    snapshot gnome-calculator gnome-weather gnome-sound-recorder \
-                   baobab dosfstools exfatprogs gpart gparted zstd dmraid vaults \
+                   baobab dosfstools exfatprogs gpart gparted zstd dmraid \
                    keepassxc \
                    metadata-cleaner bleachbit \
                    uresourced irqbalance \

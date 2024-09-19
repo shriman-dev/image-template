@@ -68,6 +68,10 @@ install-pkgs
 
 
 cleanup() {
+chmod 000 /usr/bin/ibus
+chmod 000 /usr/bin/ibus-daemon
+chmod 000 /usr/bin/ibus-setup
+
 rm -rf /home/linuxbrew 
 rm -rf /usr/share/ublue-os/homebrew
 rm -vf /usr/lib/systemd/system/brew-dir-fix.service
@@ -78,7 +82,8 @@ systemctl disable brew-dir-fix.service brew-setup.service brew-update.service \
                   brew-upgrade.service
 
 systemctl disable input-remapper.service NetworkManager-wait-online.service \
-                  systemd-networkd-wait-online.service
+                  systemd-networkd-wait-online.service tailscaled.service \
+                  setroubleshootd.service
 
 systemctl  disable sshd.service
 systemctl --global mask sshd.service

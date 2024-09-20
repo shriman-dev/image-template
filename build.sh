@@ -29,6 +29,7 @@ curl -Lo /etc/yum.repos.d/_scrcpy_copr.repo https://copr.fedorainfracloud.org/co
 curl -Lo /etc/yum.repos.d/_librewolf.repo https://rpm.librewolf.net/librewolf-repo.repo
 curl -Lo /etc/yum.repos.d/_protonplus.repo https://copr.fedorainfracloud.org/coprs/wehagy/protonplus/repo/fedora-${RELEASE}/wehagy-protonplus-fedora-${RELEASE}.repo
 
+mkdir -p /usr/share/appimage
 
 chmod +x ${SCRIPT_DIR}/configure/building-scripts/pkgs.sh
 chmod +x ${SCRIPT_DIR}/configure/building-scripts/pkgs-plain.sh

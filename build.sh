@@ -28,7 +28,7 @@ bloats='firefox firefox-langpacks fedora-chromium-config fedora-chromium-config-
 
 for II in "$bloats"
 do
-rpm-ostree override remove $II
+rpm-ostree override remove $II ; return 0
 done
 
 }

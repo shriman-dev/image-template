@@ -21,7 +21,7 @@ cp -v ${SCRIPT_DIR}/desktopfiles/io.missioncenter.MissionCenter.desktop /usr/sha
 curl -Lo /usr/share/appimage/localsend $(curl -s -X GET https://api.github.com/repos/localsend/localsend/releases | grep -iom1 '"browser_download_url": "[^"]*.appimage"' | cut -d'"' -f4)
 chmod +x /usr/share/appimage/localsend
 cp -v ${SCRIPT_DIR}/desktopfiles/LocalSend.desktop /usr/share/applications
-ls -A1 .
+
 curl -Lo /usr/share/appimage/czkawka_gui $(curl -s -X GET https://api.github.com/repos/qarmin/czkawka/releases | grep -iom1 '"browser_download_url": "[^"]*.appimage"' | cut -d'"' -f4)
 chmod +x /usr/share/appimage/czkawka_gui
 cp -v ${SCRIPT_DIR}/desktopfiles/com.github.qarmin.czkawka.desktop /usr/share/applications

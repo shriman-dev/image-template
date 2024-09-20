@@ -32,7 +32,7 @@ curl -Lo /etc/yum.repos.d/_protonplus.repo https://copr.fedorainfracloud.org/cop
 
 chmod +x ${SCRIPT_DIR}/configure/building-scripts/pkgs.sh
 chmod +x ${SCRIPT_DIR}/configure/building-scripts/pkgs-plain.sh
-if detect_os bazzite: then
+if detect_os bazzite; then
     ${SCRIPT_DIR}/configure/building-scripts/pkgs.sh
  else
     ${SCRIPT_DIR}/configure/building-scripts/pkgs-plain.sh

@@ -68,6 +68,8 @@ chmod +x /usr/share/appimage/czkawka_gui
 chmod +x ${SCRIPT_DIR}/configure/get-nerd-fonts.sh
 ${SCRIPT_DIR}/configure/get-nerd-fonts.sh
 
+
+#gnome-randr-rust wlr-randr 
 rpm-ostree install firejail firewall-config clamav clamav-freshclam \
                    clamav-unofficial-sigs \
                    fish bat eza starship fastfetch \
@@ -81,7 +83,7 @@ rpm-ostree install firejail firewall-config clamav clamav-freshclam \
                    gnome-menus gnome-themes-extra gtk-murrine-engine gtk2-engines \
                    dconf-editor gnome-tweaks gnome-characters gnome-extensions-app \
                    menulibre appeditor qt5ct qt6ct kvantum gnome-characters \
-                   awf-gtk2 awf-gtk3 awf-gtk4 gnome-randr-rust wlr-randr libgtop2 \
+                   awf-gtk2 awf-gtk3 awf-gtk4 libgtop2 \
                    nautilus nautilus-extensions nautilus-python sushi \
                    nemo folder-color-switcher-nemo nemo-compare nemo-emblems \
                    nemo-extensions nemo-fileroller nemo-preview nemo-python \

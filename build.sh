@@ -47,14 +47,15 @@ chmod 000 /usr/bin/ibus
 chmod 000 /usr/bin/ibus-daemon
 chmod 000 /usr/bin/ibus-setup
 
+systemctl disable brew-dir-fix.service brew-setup.service brew-update.service \
+                  brew-upgrade.service
+
 rm -rf /home/linuxbrew 
 rm -rf /usr/share/ublue-os/homebrew
 rm -vf /usr/lib/systemd/system/brew-dir-fix.service
 rm -vf /usr/lib/systemd/system/brew-setup.service
 rm -vf /usr/lib/systemd/system/brew-update.service
 rm -vf /usr/lib/systemd/system/brew-upgrade.service
-systemctl disable brew-dir-fix.service brew-setup.service brew-update.service \
-                  brew-upgrade.service
 
 systemctl disable input-remapper.service NetworkManager-wait-online.service \
                   systemd-networkd-wait-online.service tailscaled.service \
@@ -85,7 +86,6 @@ rm -vf /usr/share/fish/vendor_conf.d/nano-default-editor.fish
 rm -vf /usr/share/fish/vendor_conf.d/bazzite-neofetch.fish
 rm -vf /usr/share/fish/functions/fish_greeting.fish
 rm -vf /usr/share/applications/gnome-ssh-askpass.desktop
-rm -vf /usr/libexec/topgrade/mozilla-gnome-theme-update
 rm -vf /usr/libexec/topgrade/mozilla-gnome-theme-update
 }
 cleanup

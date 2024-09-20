@@ -161,6 +161,11 @@ cp -rv ${SCRIPT_DIR}/configure/bins/* /usr/bin
 cp -rv ${SCRIPT_DIR}/configure/desktopfiles/* /usr/share/applications
 cp -rv ${SCRIPT_DIR}/configure/B156HAN08_4.icm /usr/share/color/icc/colord
 
+chmod +x /usr/bin/buttersnap.sh
+chmod +x /usr/bin/performance-tweaks.sh
+chmod +x /usr/bin/ramclean.sh
+chmod +x /etc/systemd/system/kargs-and-defaults.sh
+
 systemctl enable fstrim.timer nix.mount kargs-and-defaults.service \
                  everyFewMins.service everyFewMins.timer
 

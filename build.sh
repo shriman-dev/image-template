@@ -5,32 +5,15 @@ set -ouex pipefail
 RELEASE="$(rpm -E %fedora)"
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
-grub-kargs() {
-KARGS="--append-if-missing=rd.luks=discard --append-if-missing=rd.udev.log_priority=3 --append-if-missing=loglevel=3 --append-if-missing=nowatchdog --append-if-missing=sysrq_always_enabled=1 --append-if-missing=amdgpu.ppfeaturemask=0xffffffff --append-if-missing=processor.ignore_ppc=1 --append-if-missing=preempt=full --append-if-missing=split_lock_detect=off --append-if-missing=pci=noats"
-
-sed -i "s/--append-if-missing=preempt=full/${KARGS}/" /usr/libexec/bazzite-hardware-setup
-}
-grub-kargs
 
 debloat() {
-#firefox firefox-langpacks \
-#gnome-shell-extension-launch-new-instance \
-#gnome-shell-extension-places-menu \
-#gnome-shell-extension-window-list
-#gnome-classic-session gnome-classic-session-xsession \
-#gnome-initial-setup
-#gnome-shell-extension-apps-menu \
-#gnome-shell-extension-background-logo \
-#gnome-tour \
-#gnome-shell-extension-hotedg \
+bloats='fedora-chromium-config fedora-chromium-config-gnome fedora-flathub-remote fedora-workstation-backgrounds firefox firefox-langpacks ibus-hangul ibus-libpinyin ibus-libzhuyin ibus-m17n ibus-mozc ibus-typing-booster gnome-browser-connector gnome-initial-setup nautilus-gsconnect gnome-user-docs plocate yelp gnome-shell-extension-bazzite-menu gnome-shell-extension-apps-menu gnome-shell-extension-background-logo gnome-shell-extension-blur-my-shell gnome-shell-extension-compiz-alike-magic-lamp-effect gnome-shell-extension-compiz-windows-effect gnome-classic-session gnome-classic-session-xsession gnome-shell-extension-gamerzilla gnome-shell-extension-hotedg gnome-shell-extension-just-perfection gnome-shell-extension-launch-new-instance gnome-shell-extension-places-menu gnome-shell-extension-window-list gnome-tour openssh-askpass webapp-manager steamdeck-backgrounds'
 
-bloats='firefox firefox-langpacks fedora-chromium-config fedora-chromium-config-gnome fedora-flathub-remote fedora-workstation-backgrounds ibus-hangul ibus-libpinyin ibus-libzhuyin ibus-m17n ibus-mozc ibus-typing-booster gnome-browser-connector nautilus-gsconnect gnome-user-docs plocate yelp gnome-shell-extension-bazzite-menu gnome-shell-extension-blur-my-shell gnome-shell-extension-compiz-alike-magic-lamp-effect gnome-shell-extension-compiz-windows-effect gnome-shell-extension-gamerzilla gnome-shell-extension-just-perfection gnome-shell-extension-launch-new-instance gnome-shell-extension-places-menu gnome-shell-extension-window-list openssh-askpass webapp-manager steamdeck-backgrounds'
-set +e
 for II in "$bloats"
 do
-rpm-ostree override remove $II
+rpm-ostree override remove $II || true
 done
-set -e
+
 }
 debloat
 
@@ -55,32 +38,32 @@ chmod +x /usr/bin/yazi
 
 rpm-ostree install $(curl -s -X GET https://api.github.com/repos/VSCodium/vscodium/releases/latest | grep -i '"browser_download_url": "[^"]*.x86_64.rpm"' | cut -d'"' -f4)
 
-mkdir -p /var/local/appimages
+mkdir -p /usr/share/appimage
 
-curl -Lo /var/local/appimages/onlyoffice $(curl -s -X GET https://api.github.com/repos/ONLYOFFICE/DesktopEditors/releases | grep -im1 '"browser_download_url": "[^"]*x86_64.appimage"' | cut -d'"' -f4)
-chmod +x /var/local/appimages/onlyoffice
+curl -Lo /usr/share/appimage/onlyoffice $(curl -s -X GET https://api.github.com/repos/ONLYOFFICE/DesktopEditors/releases | grep -im1 '"browser_download_url": "[^"]*x86_64.appimage"' | cut -d'"' -f4)
+chmod +x /usr/share/appimage/onlyoffice
 
-curl -Lo /var/local/appimages/upscayl $(curl -s -X GET https://api.github.com/repos/upscayl/upscayl/releases | grep -im1 '"browser_download_url": "[^"]*.appimage"' | cut -d'"' -f4)
-chmod +x /var/local/appimages/upscayl
+curl -Lo /usr/share/appimage/upscayl $(curl -s -X GET https://api.github.com/repos/upscayl/upscayl/releases | grep -im1 '"browser_download_url": "[^"]*.appimage"' | cut -d'"' -f4)
+chmod +x /usr/share/appimage/upscayl
 
-curl -Lo /var/local/appimages/freetube $(curl -s -X GET https://api.github.com/repos/FreeTubeApp/FreeTube/releases | grep -iom1 '"browser_download_url": "[^"]*.appimage"' | cut -d'"' -f4)
-chmod +x /var/local/appimages/freetube
-
-
-curl -Lo /var/local/appimages/mission-center $(curl -s https://gitlab.com/api/v4/projects/44426042/releases | grep -iom1 '"direct_asset_url":"[^"]*.appimage"' | head -n1 | cut -d'"' -f4)
-chmod +x /var/local/appimages/mission-center
+curl -Lo /usr/share/appimage/freetube $(curl -s -X GET https://api.github.com/repos/FreeTubeApp/FreeTube/releases | grep -iom1 '"browser_download_url": "[^"]*.appimage"' | cut -d'"' -f4)
+chmod +x /usr/share/appimage/freetube
 
 
-curl -Lo /var/local/appimages/heroic $(curl -s -X GET https://api.github.com/repos/Heroic-Games-Launcher/HeroicGamesLauncher/releases | grep -iom1 '"browser_download_url": "[^"]*.appimage"' | cut -d'"' -f4)
-chmod +x /var/local/appimages/heroic
+curl -Lo /usr/share/appimage/mission-center $(curl -s https://gitlab.com/api/v4/projects/44426042/releases | grep -iom1 '"direct_asset_url":"[^"]*.appimage"' | head -n1 | cut -d'"' -f4)
+chmod +x /usr/share/appimage/mission-center
 
 
-curl -Lo /var/local/appimages/localsend $(curl -s -X GET https://api.github.com/repos/localsend/localsend/releases | grep -iom1 '"browser_download_url": "[^"]*.appimage"' | cut -d'"' -f4)
-chmod +x /var/local/appimages/localsend
+curl -Lo /usr/share/appimage/heroic $(curl -s -X GET https://api.github.com/repos/Heroic-Games-Launcher/HeroicGamesLauncher/releases | grep -iom1 '"browser_download_url": "[^"]*.appimage"' | cut -d'"' -f4)
+chmod +x /usr/share/appimage/heroic
 
 
-curl -Lo /var/local/appimages/czkawka-gui $(curl -s -X GET https://api.github.com/repos/qarmin/czkawka/releases | grep -iom1 '"browser_download_url": "[^"]*.appimage"' | cut -d'"' -f4)
-chmod +x /var/local/appimages/czkawka-gui
+curl -Lo /usr/share/appimage/localsend $(curl -s -X GET https://api.github.com/repos/localsend/localsend/releases | grep -iom1 '"browser_download_url": "[^"]*.appimage"' | cut -d'"' -f4)
+chmod +x /usr/share/appimage/localsend
+
+
+curl -Lo /usr/share/appimage/czkawka_gui $(curl -s -X GET https://api.github.com/repos/qarmin/czkawka/releases | grep -iom1 '"browser_download_url": "[^"]*.appimage"' | cut -d'"' -f4)
+chmod +x /usr/share/appimage/czkawka_gui
 
 chmod +x ${SCRIPT_DIR}/configure/get-nerd-fonts.sh
 ${SCRIPT_DIR}/configure/get-nerd-fonts.sh
@@ -168,23 +151,18 @@ rm -vf /usr/share/applications/gnome-ssh-askpass.desktop
 }
 cleanup
 
-
-performance-and-compatibility() {
-sed -i "s|.*issue_discards =.*|issue_discards = 1|"  /etc/lvm/lvm.conf
-
-cp -rv ${SCRIPT_DIR}/systemfiles/* /
-
-chmod +x /usr/bin/buttersnap.sh
-chmod +x /usr/bin/performance-tweaks.sh
-chmod +x /usr/bin/ramclean.sh
-
-systemctl enable nix.mount fstrim.timer \
-                 everyFewMins.service everyFewMins.timer
-}
-performance-and-compatibility
-
 configurations() {
-sed -i 's/"pip3", //g' /usr/share/ublue-os/topgrade.toml
+sed -i "s|.*issue_discards =.*|issue_discards = 1|"  /etc/lvm/lvm.conf
+sed -i 's/"pip3", //g' /usr/share/ublue-os/topgrade.toml || true
+
+cp -rv ${SCRIPT_DIR}/configure/etc/* /etc
+cp -rv ${SCRIPT_DIR}/configure/servicefiles/* /etc/systemd/system
+cp -rv ${SCRIPT_DIR}/configure/bins/* /usr/bin
+cp -rv ${SCRIPT_DIR}/configure/desktopfiles/* /usr/share/applications
+cp -rv ${SCRIPT_DIR}/configure/B156HAN08_4.icm /usr/share/color/icc/colord
+
+systemctl enable fstrim.timer nix.mount kargs-and-defaults.service \
+                 everyFewMins.service everyFewMins.timer
 
 cp -r ${SCRIPT_DIR}/configure/plymouth-themes/* /usr/share/plymouth/themes
 cp -r ${SCRIPT_DIR}/configure/gtk-themes/* /usr/share/themes

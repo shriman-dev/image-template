@@ -11,7 +11,8 @@ on:
       - main
     paths-ignore:
       - '**/README.md'
-      - '**/build.yml'
+      - '**/build-plain.yml'
+      - '**/Containerfile-pain'
   workflow_dispatch:
 
 env:

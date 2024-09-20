@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Terminal=false
+Exec=firejail --noprofile --net=none --appimage /usr/share/appimage/czkawka_gui
+Name=Czkawka
+Comment=Multi functional app to clean OS which allow to find duplicates, empty folders, similar files etc.
+Icon=com.github.qarmin.czkawka
+Categories=System;FileTools
+Keywords=Hiccup;duplicate;same;similar;cleaner
+StartupWMClass=czkawka_gui

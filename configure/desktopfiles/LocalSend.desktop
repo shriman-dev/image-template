@@ -1,0 +1,9 @@
+[Desktop Entry]
+Categories=Network
+Exec=/usr/share/appimage/localsend
+GenericName=An open source cross-platform alternative to AirDrop
+Icon=localsend
+Name=LocalSend
+StartupWMClass=localsend_app
+Type=Application
+Version=1.4

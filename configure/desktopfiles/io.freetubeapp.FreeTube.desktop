@@ -1,0 +1,15 @@
+[Desktop Entry]
+Name=FreeTube
+Comment=An Open Source YouTube app for privacy.
+GenericName=FreeTube
+Exec=firejail --appimage /usr/share/appimage/freetube
+Icon=yt2
+Type=Application
+StartupNotify=true
+StartupWMClass=FreeTube
+Categories=GNOME;GTK;Utility;
+MimeType=x-scheme-handler/freetube;
+X-Flatpak=io.freetubeapp.FreeTube
+NoDisplay=false
+Terminal=false
+X-GNOME-UsesNotifications=false

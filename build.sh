@@ -34,9 +34,9 @@ mkdir -p /usr/share/appimage
 chmod +x ${SCRIPT_DIR}/configure/building-scripts/pkgs.sh
 chmod +x ${SCRIPT_DIR}/configure/building-scripts/pkgs-plain.sh
 if detect_os bazzite; then
-    ${SCRIPT_DIR}/configure/building-scripts/pkgs.sh
+    ${SCRIPT_DIR}/configure/pkgs.sh
  else
-    ${SCRIPT_DIR}/configure/building-scripts/pkgs-plain.sh
+    ${SCRIPT_DIR}/configure/pkgs-plain.sh
 fi
 ###
 }

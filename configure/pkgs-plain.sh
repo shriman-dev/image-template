@@ -13,19 +13,20 @@ rpm-ostree install $(curl -s -X GET https://api.github.com/repos/VSCodium/vscodi
 
 curl -Lo /usr/share/appimage/freetube $(curl -s -X GET https://api.github.com/repos/FreeTubeApp/FreeTube/releases | grep -iom1 '"browser_download_url": "[^"]*.appimage"' | cut -d'"' -f4)
 chmod +x /usr/share/appimage/freetube
-cp -v ${SCRIPT_DIR}/desktopfiles/io.freetubeapp.FreeTube.desktop /usr/share/applications
+cp -v ../desktopfiles/upscayl.desktop /usr/share/applications
+cp -v ../desktopfiles/io.freetubeapp.FreeTube.desktop /usr/share/applications
 
 curl -Lo /usr/share/appimage/mission-center $(curl -s https://gitlab.com/api/v4/projects/44426042/releases | grep -iom1 '"direct_asset_url":"[^"]*.appimage"' | head -n1 | cut -d'"' -f4)
 chmod +x /usr/share/appimage/mission-center
-cp -v ${SCRIPT_DIR}/desktopfiles/io.missioncenter.MissionCenter.desktop /usr/share/applications
+cp -v ../desktopfiles/io.missioncenter.MissionCenter.desktop /usr/share/applications
 
 curl -Lo /usr/share/appimage/localsend $(curl -s -X GET https://api.github.com/repos/localsend/localsend/releases | grep -iom1 '"browser_download_url": "[^"]*.appimage"' | cut -d'"' -f4)
 chmod +x /usr/share/appimage/localsend
-cp -v ${SCRIPT_DIR}/desktopfiles/LocalSend.desktop /usr/share/applications
+cp -v ../desktopfiles/LocalSend.desktop /usr/share/applications
 
 curl -Lo /usr/share/appimage/czkawka_gui $(curl -s -X GET https://api.github.com/repos/qarmin/czkawka/releases | grep -iom1 '"browser_download_url": "[^"]*.appimage"' | cut -d'"' -f4)
 chmod +x /usr/share/appimage/czkawka_gui
-cp -v ${SCRIPT_DIR}/desktopfiles/com.github.qarmin.czkawka.desktop /usr/share/applications
+cp -v ../desktopfiles/com.github.qarmin.czkawka.desktop /usr/share/applications
 
 rpm-ostree install firejail firewall-config \
                    fish bat eza starship fastfetch \

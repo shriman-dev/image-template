@@ -8,7 +8,8 @@ curl -OL https://github.com/sxyazi/yazi/releases/download/v0.3.3/yazi-x86_64-unk
 unzip yazi-x86_64-unknown-linux-gnu.zip
 cp -v yazi-x86_64-unknown-linux-gnu/yazi /usr/bin/
 chmod +x /usr/bin/yazi
-cp -v ${SCRIPT_DIR}/desktopfiles/yazi.desktop /usr/share/applications
+cp -v ${SCRIPT_DIR}/configure/desktopfiles/yazi.desktop /usr/share/applications
+
 
 rpm-ostree install $(curl -s -X GET https://api.github.com/repos/VSCodium/vscodium/releases/latest | grep -i '"browser_download_url": "[^"]*.x86_64.rpm"' | cut -d'"' -f4)
 
@@ -16,32 +17,32 @@ mkdir -p /usr/share/appimage
 
 curl -Lo /usr/share/appimage/onlyoffice $(curl -s -X GET https://api.github.com/repos/ONLYOFFICE/DesktopEditors/releases | grep -im1 '"browser_download_url": "[^"]*x86_64.appimage"' | cut -d'"' -f4)
 chmod +x /usr/share/appimage/onlyoffice
-cp -v ${SCRIPT_DIR}/desktopfiles/onlyoffice-desktopeditors.desktop /usr/share/applications
+cp -v ../desktopfiles/onlyoffice-desktopeditors.desktop /usr/share/applications
 
 curl -Lo /usr/share/appimage/upscayl $(curl -s -X GET https://api.github.com/repos/upscayl/upscayl/releases | grep -im1 '"browser_download_url": "[^"]*.appimage"' | cut -d'"' -f4)
 chmod +x /usr/share/appimage/upscayl
-cp -v ${SCRIPT_DIR}/desktopfiles/upscayl.desktop /usr/share/applications
+cp -v ../desktopfiles/upscayl.desktop /usr/share/applications
 
 
 curl -Lo /usr/share/appimage/freetube $(curl -s -X GET https://api.github.com/repos/FreeTubeApp/FreeTube/releases | grep -iom1 '"browser_download_url": "[^"]*.appimage"' | cut -d'"' -f4)
 chmod +x /usr/share/appimage/freetube
-cp -v ${SCRIPT_DIR}/desktopfiles/io.freetubeapp.FreeTube.desktop /usr/share/applications
+cp -v ../desktopfiles/io.freetubeapp.FreeTube.desktop /usr/share/applications
 
 curl -Lo /usr/share/appimage/mission-center $(curl -s https://gitlab.com/api/v4/projects/44426042/releases | grep -iom1 '"direct_asset_url":"[^"]*.appimage"' | head -n1 | cut -d'"' -f4)
 chmod +x /usr/share/appimage/mission-center
-cp -v ${SCRIPT_DIR}/desktopfiles/io.missioncenter.MissionCenter.desktop /usr/share/applications
+cp -v ../desktopfiles/io.missioncenter.MissionCenter.desktop /usr/share/applications
 
 curl -Lo /usr/share/appimage/heroic $(curl -s -X GET https://api.github.com/repos/Heroic-Games-Launcher/HeroicGamesLauncher/releases | grep -iom1 '"browser_download_url": "[^"]*.appimage"' | cut -d'"' -f4)
 chmod +x /usr/share/appimage/heroic
-cp -v ${SCRIPT_DIR}/desktopfiles/com.heroicgameslauncher.hgl.desktop /usr/share/applications
+cp -v ../desktopfiles/com.heroicgameslauncher.hgl.desktop /usr/share/applications
 
 curl -Lo /usr/share/appimage/localsend $(curl -s -X GET https://api.github.com/repos/localsend/localsend/releases | grep -iom1 '"browser_download_url": "[^"]*.appimage"' | cut -d'"' -f4)
 chmod +x /usr/share/appimage/localsend
-cp -v ${SCRIPT_DIR}/desktopfiles/LocalSend.desktop /usr/share/applications
+cp -v ../desktopfiles/LocalSend.desktop /usr/share/applications
 
 curl -Lo /usr/share/appimage/czkawka_gui $(curl -s -X GET https://api.github.com/repos/qarmin/czkawka/releases | grep -iom1 '"browser_download_url": "[^"]*.appimage"' | cut -d'"' -f4)
 chmod +x /usr/share/appimage/czkawka_gui
-cp -v ${SCRIPT_DIR}/desktopfiles/com.github.qarmin.czkawka.desktop /usr/share/applications
+cp -v ../desktopfiles/com.github.qarmin.czkawka.desktop /usr/share/applications
 
 chmod +x ${SCRIPT_DIR}/configure/get-nerd-fonts.sh
 ${SCRIPT_DIR}/configure/get-nerd-fonts.sh

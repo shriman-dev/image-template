@@ -11,31 +11,31 @@ detect_os() {
 debloat() {
 bloats='fedora-chromium-config fedora-chromium-config-gnome fedora-flathub-remote fedora-workstation-backgrounds firefox firefox-langpacks ibus-hangul ibus-libpinyin ibus-libzhuyin ibus-m17n ibus-mozc ibus-typing-booster gnome-browser-connector gnome-initial-setup nautilus-gsconnect gnome-user-docs plocate yelp gnome-shell-extension-bazzite-menu gnome-shell-extension-apps-menu gnome-shell-extension-background-logo gnome-shell-extension-blur-my-shell gnome-shell-extension-compiz-alike-magic-lamp-effect gnome-shell-extension-compiz-windows-effect gnome-classic-session gnome-classic-session-xsession gnome-shell-extension-gamerzilla gnome-shell-extension-hotedg gnome-shell-extension-just-perfection gnome-shell-extension-launch-new-instance gnome-shell-extension-places-menu gnome-shell-extension-window-list gnome-tour openssh-askpass webapp-manager steamdeck-backgrounds'
 
-set +e
 for II in "$bloats"
 do
-rpm-ostree override remove $II
+rpm-ostree override remove $II || true
 done
-set -e
+
 }
 debloat
 
 
 install-pkgs() {
 # setup Copr repos
-#curl -Lo /usr/bin/copr https://raw.githubusercontent.com/ublue-os/COPR-command/main/copr && \
-#chmod +x /usr/bin/copr
+curl -Lo /usr/bin/copr https://raw.githubusercontent.com/ublue-os/COPR-command/main/copr && \
+chmod +x /usr/bin/copr
 curl -Lo /etc/yum.repos.d/_starship_copr.repo  https://copr.fedorainfracloud.org/coprs/atim/starship/repo/fedora-${RELEASE}/atim-starship-fedora-${RELEASE}.repo
 curl -Lo /etc/yum.repos.d/_scrcpy_copr.repo https://copr.fedorainfracloud.org/coprs/zeno/scrcpy/repo/fedora-${RELEASE}/zeno-scrcpy-fedora-${RELEASE}.repo
 curl -Lo /etc/yum.repos.d/_librewolf.repo https://rpm.librewolf.net/librewolf-repo.repo
 curl -Lo /etc/yum.repos.d/_protonplus.repo https://copr.fedorainfracloud.org/coprs/wehagy/protonplus/repo/fedora-${RELEASE}/wehagy-protonplus-fedora-${RELEASE}.repo
 
 
-
+chmod +x ${SCRIPT_DIR}/configure/building-scripts/pkgs.sh
+chmod +x ${SCRIPT_DIR}/configure/building-scripts/pkgs-plain.sh
 if detect_os bazzite: then
-    sh ${SCRIPT_DIR}/configure/building-scripts/pkgs.sh
-else
-    sh ${SCRIPT_DIR}/configure/building-scripts/pkgs-plain.sh
+    ${SCRIPT_DIR}/configure/building-scripts/pkgs.sh
+ else
+    ${SCRIPT_DIR}/configure/building-scripts/pkgs-plain.sh
 fi
 ###
 }

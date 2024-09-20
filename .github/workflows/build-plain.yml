@@ -1,5 +1,5 @@
 ---
-name: oogabooga-os-nvidia
+name: oogabooga-os-plain
 on:
   pull_request:
     branches:
@@ -16,7 +16,7 @@ on:
   workflow_dispatch:
 
 env:
-  MY_IMAGE_NAME: "${{ github.event.repository.name }}-nvidia"  # the name of the image produced by this build, matches repo names
+  MY_IMAGE_NAME: "${{ github.event.repository.name }}-plain"  # the name of the image produced by this build, matches repo names
   MY_IMAGE_DESC: "My Customized Universal Blue Image"
   IMAGE_REGISTRY: "ghcr.io/${{ github.repository_owner }}"  # do not edit
 

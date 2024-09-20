@@ -23,21 +23,13 @@ debloat() {
 #gnome-shell-extension-background-logo \
 #gnome-tour \
 #gnome-shell-extension-hotedg \
-rpm-ostree override remove fedora-chromium-config fedora-chromium-config-gnome \
-                           fedora-flathub-remote fedora-workstation-backgrounds \
-                           ibus-hangul ibus-libpinyin ibus-libzhuyin ibus-m17n \
-                           ibus-mozc ibus-typing-booster gnome-browser-connector \
-                           nautilus-gsconnect gnome-user-docs plocate yelp \
-                           gnome-shell-extension-bazzite-menu \
-                           gnome-shell-extension-blur-my-shell \
-                           gnome-shell-extension-compiz-alike-magic-lamp-effect \
-                           gnome-shell-extension-compiz-windows-effect \
-                           gnome-shell-extension-gamerzilla \
-                           gnome-shell-extension-just-perfection \
-                           gnome-shell-extension-launch-new-instance \
-                           gnome-shell-extension-places-menu \
-                           gnome-shell-extension-window-list \
-                           openssh-askpass webapp-manager steamdeck-backgrounds
+
+bloats='firefox firefox-langpacks fedora-chromium-config fedora-chromium-config-gnome fedora-flathub-remote fedora-workstation-backgrounds ibus-hangul ibus-libpinyin ibus-libzhuyin ibus-m17n ibus-mozc ibus-typing-booster gnome-browser-connector nautilus-gsconnect gnome-user-docs plocate yelpgnome-shell-extension-bazzite-menu gnome-shell-extension-blur-my-shell gnome-shell-extension-compiz-alike-magic-lamp-effect gnome-shell-extension-compiz-windows-effect gnome-shell-extension-gamerzilla gnome-shell-extension-just-perfection gnome-shell-extension-launch-new-instance gnome-shell-extension-places-menu gnome-shell-extension-window-list openssh-askpass webapp-manager steamdeck-backgrounds'
+
+for II in "$bloats"
+do
+rpm-ostree override remove $II
+done
 
 }
 debloat

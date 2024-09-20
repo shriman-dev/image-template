@@ -33,9 +33,9 @@ mkdir -p /usr/share/appimage
 
 
 if detect_os bazzite; then
-    ${SCRIPT_DIR}/configure/pkgs.sh
+    sh ${SCRIPT_DIR}/configure/pkgs.sh
  else
-    ${SCRIPT_DIR}/configure/pkgs-plain.sh
+    sh ${SCRIPT_DIR}/configure/pkgs-plain.sh
 fi
 ###
 }

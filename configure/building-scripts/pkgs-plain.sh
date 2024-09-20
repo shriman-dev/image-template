@@ -37,7 +37,7 @@ rpm-ostree install firejail firewall-config \
                    gnome-menus gnome-themes-extra gtk-murrine-engine gtk2-engines \
                    dconf-editor gnome-tweaks gnome-characters gnome-extensions-app \
                    menulibre qt5ct qt6ct kvantum gnome-characters \
-                   nautilus nautilus-extensions nautilus-python sushi
+                   nautilus nautilus-extensions nautilus-python sushi \
                    clapper gnome-music loupe meld evince file-roller \
                    pinta inkscape pitivi \
                    libreoffice gedit foliate \

@@ -16,7 +16,6 @@ rpm-ostree override remove firefox firefox-langpacks || true
 
 for II in ${bloats}
 do
-echo -e "\n$II\n"
 rpm-ostree override remove $II || true
 done
 
@@ -116,8 +115,8 @@ chmod +x /usr/bin/buttersnap.sh
 chmod +x /usr/bin/performance-tweaks.sh
 chmod +x /usr/bin/ramclean.sh
 chmod +x /etc/systemd/system/kargs-and-defaults.sh
-
-systemctl enable fstrim.timer nix.mount kargs-and-defaults.service \
+#nix.mount
+systemctl enable fstrim.timer kargs-and-defaults.service \
                  everyFewMins.service everyFewMins.timer
 
 cp -r ${SCRIPT_DIR}/configure/plymouth-themes/* /usr/share/plymouth/themes

@@ -11,6 +11,9 @@ detect_os() {
 debloat() {
 bloats="fedora-chromium-config fedora-chromium-config-gnome fedora-flathub-remote fedora-workstation-backgrounds firefox firefox-langpacks ibus-hangul ibus-libpinyin ibus-libzhuyin ibus-m17n ibus-mozc ibus-typing-booster gnome-browser-connector gnome-initial-setup nautilus-gsconnect gnome-user-docs plocate yelp gnome-shell-extension-bazzite-menu gnome-shell-extension-apps-menu gnome-shell-extension-background-logo gnome-shell-extension-blur-my-shell gnome-shell-extension-compiz-alike-magic-lamp-effect gnome-shell-extension-compiz-windows-effect gnome-classic-session gnome-classic-session-xsession gnome-shell-extension-gamerzilla gnome-shell-extension-hotedg gnome-shell-extension-just-perfection gnome-shell-extension-launch-new-instance gnome-shell-extension-places-menu gnome-shell-extension-window-list gnome-tour openssh-askpass webapp-manager steamdeck-backgrounds"
 
+
+rpm-ostree override remove firefox firefox-langpacks || true
+
 for II in ${bloats}
 do
 echo -e "\n$II\n"
@@ -48,6 +51,10 @@ cleanup() {
 chmod 000 /usr/bin/ibus
 chmod 000 /usr/bin/ibus-daemon
 chmod 000 /usr/bin/ibus-setup
+chmod 000 /usr/libexec/evolution-addressbook-factory
+chmod 000 /usr/libexec/evolution-calendar-factory
+chmod 000 /usr/libexec/evolution-data-server/evolution-alarm-notify
+
 
 systemctl disable brew-dir-fix.service brew-setup.service brew-update.service \
                   brew-upgrade.service
@@ -96,6 +103,10 @@ configurations() {
 sed -i "s|.*issue_discards =.*|issue_discards = 1|"  /etc/lvm/lvm.conf
 sed -i 's/"pip3", //g' /usr/share/ublue-os/topgrade.toml || true
 
+#fix librewolf/firefox delayed launch issue
+#'/^hosts:/ s/mdns4_minimal/myhostname &/'
+sed  -i '/^hosts:/ s/myhostname//; /^hosts:.*files\s\+myhostname/! s/mdns4_minimal/myhostname &/' /etc/nsswitch.conf
+
 cp -rv ${SCRIPT_DIR}/configure/etc/* /etc
 cp -rv ${SCRIPT_DIR}/configure/servicefiles/* /etc/systemd/system
 cp -rv ${SCRIPT_DIR}/configure/bins/* /usr/bin
@@ -114,6 +125,3 @@ cp -r ${SCRIPT_DIR}/configure/gtk-themes/* /usr/share/themes
 cp -r ${SCRIPT_DIR}/configure/icons/* /usr/share/icons
 }
 configurations
-
-
-

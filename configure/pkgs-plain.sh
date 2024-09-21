@@ -7,4 +7,4 @@ rpm-ostree install firejail firewall-config \
                    librewolf \
                    ptyxis \
                    dosfstools exfatprogs gpart gparted zstd dmraid \
-                   uresourced irqbalance optimizer
+                   uresourced irqbalance

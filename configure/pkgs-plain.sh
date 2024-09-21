@@ -10,5 +10,10 @@ rpm-ostree install firejail firewall-config \
                    ptyxis \
                    dosfstools exfatprogs gpart gparted zstd dmraid \
                    uresourced irqbalance
-                   
-eza
+
+
+curl -sL -o nix-installer https://install.determinate.systems/nix/nix-installer-x86_64-linux
+chmod +x nix-installer
+./nix-installer
+nix-env -iA nixpkgs.cbonsai
+cbonsai

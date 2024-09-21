@@ -12,11 +12,7 @@ rpm-ostree install firejail firewall-config \
                    uresourced irqbalance
 
 
-export NIX_INSTALLER_START_DAEMON=false
-curl -sL -o nix-installer https://install.determinate.systems/nix/nix-installer-x86_64-linux
-chmod +x nix-installer
-./nix-installer install ostree --no-confirm --init none
-
+curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install linux --no-confirm --no-start-daemon
 nix-channel --list
 
 nix-env -i cbonsai

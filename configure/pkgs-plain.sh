@@ -12,6 +12,6 @@ rpm-ostree install firejail firewall-config \
                    uresourced irqbalance
 
 
-curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
+curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install --no-confirm
 nix-env -iA nixpkgs.cbonsai
 cbonsai

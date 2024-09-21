@@ -28,19 +28,12 @@ install-pkgs() {
 # setup Copr repos
 curl -Lo /usr/bin/copr https://raw.githubusercontent.com/ublue-os/COPR-command/main/copr && \
 chmod +x /usr/bin/copr
-curl -Lo /etc/yum.repos.d/_starship_copr.repo  https://copr.fedorainfracloud.org/coprs/atim/starship/repo/fedora-${RELEASE}/atim-starship-fedora-${RELEASE}.repo
-curl -Lo /etc/yum.repos.d/_scrcpy_copr.repo https://copr.fedorainfracloud.org/coprs/zeno/scrcpy/repo/fedora-${RELEASE}/zeno-scrcpy-fedora-${RELEASE}.repo
+
 curl -Lo /etc/yum.repos.d/_librewolf.repo https://rpm.librewolf.net/librewolf-repo.repo
-curl -Lo /etc/yum.repos.d/_protonplus.repo https://copr.fedorainfracloud.org/coprs/wehagy/protonplus/repo/fedora-${RELEASE}/wehagy-protonplus-fedora-${RELEASE}.repo
 
 mkdir -p /usr/share/appimage
 
-
-if detect_os bazzite; then
-    sh ${SCRIPT_DIR}/configure/pkgs.sh
- else
-    sh ${SCRIPT_DIR}/configure/pkgs-plain.sh
-fi
+sh ${SCRIPT_DIR}/configure/pkgs-plain.sh
 ###
 }
 install-pkgs

@@ -10,7 +10,7 @@ detect_os() {
 
 
 
-
+mkdir -m 0755 /nix && chown root /nix
 sh <(curl -L https://nixos.org/nix/install) --no-daemon
 
 nix-channel --list

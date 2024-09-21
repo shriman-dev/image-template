@@ -11,14 +11,10 @@ detect_os() {
 
 
 
-export NIX_INSTALLER_START_DAEMON=false
-curl -sL -o nix-installer https://install.determinate.systems/nix/nix-installer-x86_64-linux
-chmod +x nix-installer
-./nix-installer install ostree \
---no-confirm \
---init none
+sh <(curl -L https://nixos.org/nix/install) --no-daemon
 
 nix-channel --list
+nix-channel --add https://nixos.org/channels/nixpkgs-unstable && nix-channel --update
 
 nix-env -i cbonsai
 cbonsai

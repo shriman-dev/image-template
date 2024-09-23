@@ -11,15 +11,12 @@ detect_os() {
 debloat() {
 bloats="fastfetch fedora-chromium-config fedora-chromium-config-gnome fedora-flathub-remote fedora-workstation-backgrounds firefox firefox-langpacks ibus-hangul ibus-libpinyin ibus-libzhuyin ibus-m17n ibus-mozc ibus-typing-booster gnome-browser-connector gnome-initial-setup nautilus-gsconnect gnome-user-docs plocate yelp gnome-shell-extension-bazzite-menu gnome-shell-extension-apps-menu gnome-shell-extension-background-logo gnome-shell-extension-blur-my-shell gnome-shell-extension-compiz-alike-magic-lamp-effect gnome-shell-extension-compiz-windows-effect gnome-classic-session gnome-classic-session-xsession gnome-shell-extension-gamerzilla gnome-shell-extension-hotedg gnome-shell-extension-just-perfection gnome-shell-extension-launch-new-instance gnome-shell-extension-places-menu gnome-shell-extension-window-list gnome-tour openssh-askpass webapp-manager steamdeck-backgrounds"
 
-
 rpm-ostree override remove firefox firefox-langpacks || true
 
 for II in ${bloats}
 do
 rpm-ostree override remove $II || true
 done
-
-
 }
 debloat
 
@@ -43,6 +40,7 @@ cleanup() {
 chmod 000 /usr/bin/ibus
 chmod 000 /usr/bin/ibus-daemon
 chmod 000 /usr/bin/ibus-setup
+chmod 000 /usr/libexec/evolution-source-registry
 chmod 000 /usr/libexec/evolution-addressbook-factory
 chmod 000 /usr/libexec/evolution-calendar-factory
 chmod 000 /usr/libexec/evolution-data-server/evolution-alarm-notify
@@ -91,6 +89,7 @@ rm -vf /usr/libexec/topgrade/mozilla-gnome-theme-update
 }
 cleanup
 
+
 configurations() {
 sed -i "s|.*issue_discards =.*|issue_discards = 1|"  /etc/lvm/lvm.conf
 sed -i 's/"pip3", //g' /usr/share/ublue-os/topgrade.toml || true
@@ -99,6 +98,8 @@ sed -i 's/"pip3", //g' /usr/share/ublue-os/topgrade.toml || true
 #'/^hosts:/ s/mdns4_minimal/myhostname &/'
 sed  -i '/^hosts:/ s/myhostname//; /^hosts:.*files\s\+myhostname/! s/mdns4_minimal/myhostname &/' /etc/nsswitch.conf
 
+cp -fv ${SCRIPT_DIR}/configure/bazzite-user-setup.service /usr/lib/systemd/system/
+cp -fv ${SCRIPT_DIR}/configure/bazzite-hardware-setup /usr/libexec/
 cp -rv ${SCRIPT_DIR}/configure/etc/* /etc
 cp -rv ${SCRIPT_DIR}/configure/servicefiles/* /etc/systemd/system
 cp -rv ${SCRIPT_DIR}/configure/bins/* /usr/bin
@@ -107,13 +108,14 @@ cp -rv ${SCRIPT_DIR}/configure/B156HAN08_4.icm /usr/share/color/icc/colord
 chmod +x /usr/bin/buttersnap.sh
 chmod +x /usr/bin/performance-tweaks.sh
 chmod +x /usr/bin/ramclean.sh
-chmod +x /etc/systemd/system/kargs-and-defaults.sh
-#nix.mount
-systemctl enable fstrim.timer kargs-and-defaults.service \
-                 everyFewMins.service everyFewMins.timer
 
-cp -r ${SCRIPT_DIR}/configure/plymouth-themes/* /usr/share/plymouth/themes
-cp -r ${SCRIPT_DIR}/configure/gtk-themes/* /usr/share/themes
-cp -r ${SCRIPT_DIR}/configure/icons/* /usr/share/icons
+systemctl enable fstrim.timer nix.mount \
+                 everyFewMins.service everyFewMins.timer bazzite-user-setup.service
+
+mkdir -p /usr/share/grub/themes
+cp -rf ${SCRIPT_DIR}/configure/grub-themes/* /usr/share/grub/themes
+cp -rf ${SCRIPT_DIR}/configure/plymouth-themes/* /usr/share/plymouth/themes
+cp -rf ${SCRIPT_DIR}/configure/gtk-themes/* /usr/share/themes
+cp -rf ${SCRIPT_DIR}/configure/icons/* /usr/share/icons
 }
 configurations

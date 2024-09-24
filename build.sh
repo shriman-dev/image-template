@@ -20,13 +20,22 @@ done
 }
 debloat
 
+install-nix() {
+useradd nix && mkdir -m 0755 /nix && chown nix /nix
+sudo -u nix -- bash -c 'curl -fLs https://nixos.org/nix/install | sh -s -- --no-daemon --yes'
+cp -pr /home/nix/.local/state/nix/profiles/profile-1-link /nix/var/nix/profiles/default
+}
+install-nix
 
 install-pkgs() {
 # setup Copr repos
 curl -Lo /usr/bin/copr https://raw.githubusercontent.com/ublue-os/COPR-command/main/copr && \
 chmod +x /usr/bin/copr
-
 curl -Lo /etc/yum.repos.d/_librewolf.repo https://rpm.librewolf.net/librewolf-repo.repo
+
+
+
+
 
 mkdir -p /usr/share/appimage
 
@@ -98,12 +107,7 @@ sed -i 's/"pip3", //g' /usr/share/ublue-os/topgrade.toml || true
 #'/^hosts:/ s/mdns4_minimal/myhostname &/'
 sed  -i '/^hosts:/ s/myhostname//; /^hosts:.*files\s\+myhostname/! s/mdns4_minimal/myhostname &/' /etc/nsswitch.conf
 
-cp -fv ${SCRIPT_DIR}/configure/bazzite-user-setup.service /usr/lib/systemd/system/
-cp -fv ${SCRIPT_DIR}/configure/bazzite-hardware-setup /usr/libexec/
-cp -rv ${SCRIPT_DIR}/configure/etc/* /etc
-cp -rv ${SCRIPT_DIR}/configure/servicefiles/* /etc/systemd/system
-cp -rv ${SCRIPT_DIR}/configure/bins/* /usr/bin
-cp -rv ${SCRIPT_DIR}/configure/B156HAN08_4.icm /usr/share/color/icc/colord
+cp -fv ${SCRIPT_DIR}/configure/rootfs/* /
 
 chmod +x /usr/bin/buttersnap.sh
 chmod +x /usr/bin/performance-tweaks.sh
@@ -119,3 +123,5 @@ cp -rf ${SCRIPT_DIR}/configure/gtk-themes/* /usr/share/themes
 cp -rf ${SCRIPT_DIR}/configure/icons/* /usr/share/icons
 }
 configurations
+
+rpm-ostree cleanup -m

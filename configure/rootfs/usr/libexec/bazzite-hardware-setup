@@ -150,11 +150,11 @@ replace-x-add() {
 grep -qi ''${1}'' ${3} && sed -i -e "s|.*${1}.*|${2}|" ${3} || sh -c "echo '${2}' >> ${3}"
 }
 
-if [ ! -f '/boot/catppuccino-os' ]; then
+if [ ! -f '/etc/catppuccino-os' ]; then
 mkdir -p /boot/grub_themes
 cp -rf /usr/share/grub/themes/* /boot/grub_themes
 
-replace-x-add 'GRUB_TIMEOUT=' 'GRUB_TIMEOUT=5' /etc/default/grub
+replace-x-add 'GRUB_TIMEOUT=' 'GRUB_TIMEOUT=1' /etc/default/grub
 replace-x-add 'GRUB_GFXPAYLOAD_LINUX=' 'GRUB_GFXPAYLOAD_LINUX=keep' /etc/default/grub
 replace-x-add 'GRUB_GFXMODE=' 'GRUB_GFXMODE='$(xdpyinfo | grep -oP 'dimensions:\s+\K\S+') /etc/default/grub
 replace-x-add 'GRUB_TERMINAL_OUTPUT=' 'GRUB_TERMINAL_OUTPUT=gfxterm' /etc/default/grub
@@ -168,7 +168,7 @@ rpm-ostree initramfs --enable
 
 hostnamectl set-hostname --static "catppuccino"
 
-echo 'first boot' > /boot/catppuccino-os
+echo 'first boot' > /etc/catppuccino-os
 
 fi
 

@@ -106,7 +106,7 @@ sed -i 's/"pip3", //g' /usr/share/ublue-os/topgrade.toml || true
 #'/^hosts:/ s/mdns4_minimal/myhostname &/'
 sed  -i '/^hosts:/ s/myhostname//; /^hosts:.*files\s\+myhostname/! s/mdns4_minimal/myhostname &/' /etc/nsswitch.conf
 
-cp -fv ${SCRIPT_DIR}/configure/rootfs/* /
+cp -rfv ${SCRIPT_DIR}/configure/rootfs/* /
 
 chmod +x /usr/bin/buttersnap.sh
 chmod +x /usr/bin/performance-tweaks.sh

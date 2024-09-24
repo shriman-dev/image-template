@@ -9,7 +9,7 @@ detect_os() {
 }
 
 install-nix() {
-cat /etc/pam.d/su
+cat /etc/pam.d/* 
 useradd nix && mkdir -m 0755 /nix && chown nix /nix
 curl -Lo /tmp/nix-install https://nixos.org/nix/install
 chmod 777 /tmp/nix-install

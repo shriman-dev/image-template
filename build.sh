@@ -9,7 +9,7 @@ detect_os() {
 }
 
 install-nix() {
-dnf install -y xz --setopt=install_weak_deps=False
+dnf install -y xz
 
 useradd nix && mkdir -m 0755 /nix && chown nix /nix
 su - nix -- bash -c 'curl -fLs https://nixos.org/nix/install | sh -s -- --no-daemon --yes'

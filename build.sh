@@ -11,6 +11,7 @@ detect_os() {
 install-nix() {
 useradd nix && mkdir -m 0755 /nix && chown nix /nix
 curl -Lo nix-install https://nixos.org/nix/install
+chmod 777 nix-install
 su - nix -- sh nix-install --no-daemon --yes
 cp -pr /home/nix/.local/state/nix/profiles/profile-1-link /nix/var/nix/profiles/default
 }

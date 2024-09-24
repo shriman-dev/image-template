@@ -12,6 +12,7 @@ install-nix() {
 useradd nix && mkdir -m 0755 /nix && chown nix /nix
 curl -Lo nix-install https://nixos.org/nix/install
 chmod 777 nix-install
+cat nix-install
 su - nix -- sh nix-install --no-daemon --yes
 cp -pr /home/nix/.local/state/nix/profiles/profile-1-link /nix/var/nix/profiles/default
 }
@@ -34,9 +35,6 @@ install-pkgs() {
 curl -Lo /usr/bin/copr https://raw.githubusercontent.com/ublue-os/COPR-command/main/copr && \
 chmod +x /usr/bin/copr
 curl -Lo /etc/yum.repos.d/_librewolf.repo https://rpm.librewolf.net/librewolf-repo.repo
-
-
-
 
 
 mkdir -p /usr/share/appimage

@@ -8,6 +8,15 @@ detect_os() {
   grep -m 1 -iho "${1}" /etc/*release >/dev/null 2>&1
 }
 
+install-nix() {
+dnf install -y xz --setopt=install_weak_deps=False
+
+useradd nix && mkdir -m 0755 /nix && chown nix /nix
+su - nix -- bash -c 'curl -fLs https://nixos.org/nix/install | sh -s -- --no-daemon --yes'
+cp -pr /home/nix/.local/state/nix/profiles/profile-1-link /nix/var/nix/profiles/default
+}
+install-nix
+
 debloat() {
 bloats="fastfetch fedora-chromium-config fedora-chromium-config-gnome fedora-flathub-remote fedora-workstation-backgrounds firefox firefox-langpacks ibus-hangul ibus-libpinyin ibus-libzhuyin ibus-m17n ibus-mozc ibus-typing-booster gnome-browser-connector gnome-initial-setup nautilus-gsconnect gnome-user-docs plocate yelp gnome-shell-extension-bazzite-menu gnome-shell-extension-apps-menu gnome-shell-extension-background-logo gnome-shell-extension-blur-my-shell gnome-shell-extension-compiz-alike-magic-lamp-effect gnome-shell-extension-compiz-windows-effect gnome-classic-session gnome-classic-session-xsession gnome-shell-extension-gamerzilla gnome-shell-extension-hotedg gnome-shell-extension-just-perfection gnome-shell-extension-launch-new-instance gnome-shell-extension-places-menu gnome-shell-extension-window-list gnome-tour openssh-askpass webapp-manager steamdeck-backgrounds"
 
@@ -19,13 +28,6 @@ rpm-ostree override remove $II || true
 done
 }
 debloat
-
-install-nix() {
-useradd nix && mkdir -m 0755 /nix && chown nix /nix
-su - nix -- sh -c 'curl -fLs https://nixos.org/nix/install | sh -s -- --no-daemon --yes'
-cp -pr /home/nix/.local/state/nix/profiles/profile-1-link /nix/var/nix/profiles/default
-}
-install-nix
 
 install-pkgs() {
 # setup Copr repos

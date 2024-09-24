@@ -1,20 +1,17 @@
 [Unit]
-Description=Nix overlay mount
-Wants=mkdir-rootfs@nix.service
+Description=Nix Package Manager
+DefaultDependencies=no
 After=mkdir-rootfs@nix.service
-Wants=nix-cleanup.service
-After=nix-cleanup.service
-After=var.mount
-ConditionPathIsDirectory=%S/nix
-ConditionPathIsDirectory=%C/nix
-ConditionPathExists=/usr/share/nix/store
-ConditionPathExists=!/nix/store
+Wants=mkdir-rootfs@nix.service
+Before=sockets.target
+After=ostree-remount.service
+BindsTo=var.mount
 
 [Mount]
-Type=overlay
-What=overlay
-Options=noauto,nofail,lowerdir=/usr/share/nix,upperdir=%S/nix,workdir=%C/nix
+What=/var/nix
 Where=/nix
+Options=bind
+Type=none
 
 [Install]
 WantedBy=local-fs.target

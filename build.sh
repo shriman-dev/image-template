@@ -8,16 +8,17 @@ detect_os() {
   grep -m 1 -iho "${1}" /etc/*release >/dev/null 2>&1
 }
 
+
 install-nix() {
 sed -i 's/^session/#session/' /etc/pam.d/su
-useradd nix && mkdir -m 0755 /nix && chown nix /nix
+useradd nix && mkdir -pm 0755 /nix && chown nix /nix
 curl -Lo /tmp/nix-install https://nixos.org/nix/install
 chmod 777 /tmp/nix-install
 su - nix -- /tmp/nix-install --no-daemon --yes
 cp -pr /home/nix/.local/state/nix/profiles/profile-1-link /nix/var/nix/profiles/default
 sed -i 's/^#session/session/' /etc/pam.d/su
 }
-install-nix
+
 
 debloat() {
 bloats="fastfetch fedora-chromium-config fedora-chromium-config-gnome fedora-flathub-remote fedora-workstation-backgrounds firefox firefox-langpacks ibus-hangul ibus-libpinyin ibus-libzhuyin ibus-m17n ibus-mozc ibus-typing-booster gnome-browser-connector gnome-initial-setup nautilus-gsconnect gnome-user-docs plocate yelp gnome-shell-extension-bazzite-menu gnome-shell-extension-apps-menu gnome-shell-extension-background-logo gnome-shell-extension-blur-my-shell gnome-shell-extension-compiz-alike-magic-lamp-effect gnome-shell-extension-compiz-windows-effect gnome-classic-session gnome-classic-session-xsession gnome-shell-extension-gamerzilla gnome-shell-extension-hotedg gnome-shell-extension-just-perfection gnome-shell-extension-launch-new-instance gnome-shell-extension-places-menu gnome-shell-extension-window-list gnome-tour openssh-askpass webapp-manager steamdeck-backgrounds"

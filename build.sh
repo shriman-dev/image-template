@@ -22,7 +22,7 @@ debloat
 
 install-nix() {
 useradd nix && mkdir -m 0755 /nix && chown nix /nix
-sudo -u nix -- bash -c 'curl -fLs https://nixos.org/nix/install | sh -s -- --no-daemon --yes'
+su - nix -- bash -c 'curl -fLs https://nixos.org/nix/install | sh -s -- --no-daemon --yes'
 cp -pr /home/nix/.local/state/nix/profiles/profile-1-link /nix/var/nix/profiles/default
 }
 install-nix

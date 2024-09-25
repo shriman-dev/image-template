@@ -183,6 +183,7 @@ KARGS_TO_ADD=(
   "pci=noats"
   "bluetooth.disable_ertm=1"
   "preempt=full"
+  "mem_sleep_default=deep"
 )
 
 for karg in "${KARGS_TO_ADD[@]}"; do

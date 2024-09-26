@@ -18,7 +18,7 @@ su - nix -- /tmp/nix-install --no-daemon --yes
 cp -pr /home/nix/.local/state/nix/profiles/profile-1-link /nix/var/nix/profiles/default
 sed -i 's/^#session/session/' /etc/pam.d/su
 }
-
+mkdir -p /usr/local
 curl -fsSL https://ollama.com/install.sh | sh
 
 

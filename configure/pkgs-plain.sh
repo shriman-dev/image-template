@@ -11,6 +11,6 @@ rpm-ostree install firejail firewall-config \
                    librewolf \
                    ptyxis \
                    dosfstools exfatprogs gpart gparted zstd dmraid \
-                   uresourced irqbalance
+                   uresourced irqbalance \
                    bottles goverlay gamescope \ #steam lutris
                    gamemode mangohud vkBasalt fluidsynth \

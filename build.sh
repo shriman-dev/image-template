@@ -8,7 +8,7 @@ detect_os() {
   grep -m 1 -iho "${1}" /etc/*release >/dev/null 2>&1
 }
 
-
+ 
 install-nix() {
 sed -i 's/^session/#session/' /etc/pam.d/su
 useradd nix && mkdir -pm 0755 /nix && chown nix /nix
